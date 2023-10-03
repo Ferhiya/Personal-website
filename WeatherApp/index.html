@@ -20,9 +20,15 @@
       </header>
       <div class="container">
         <input type="text" id="cityInput" placeholder="Enter city name">
-        <button id="searchButton">Search</button>
+        
+        <button onclick="hämtaVäder()" id="searchButton">Search</button>
+        
+        
         <div id="weatherInfo">
           <!-- Weather data will be displayed here -->
+          <p id="temp"></p>
+          <p id="cond"></p>
+         
         </div>
       </div>
       <script src="script.js"></script>
