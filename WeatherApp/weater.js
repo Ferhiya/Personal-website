@@ -101,5 +101,6 @@ function hämtaVäder() {
         väderElement.innerHTML="<p>Väder information om staden finns inte</p>";
         // Clear the input field after the search
         document.getElementById("cityInput").value = "";
+        return;
     }
 }
