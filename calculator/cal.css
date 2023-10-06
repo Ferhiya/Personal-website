@@ -36,7 +36,7 @@ header {
     max-height: 550px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
-    grid-template-columns: repeat(4,70px);
+    grid-template-columns: repeat(4,75px);
     grid-template-rows: minmax(10px,auto) repeat(4,75px);
     margin-bottom: 3%;
 
