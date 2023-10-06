@@ -44,7 +44,7 @@ header {
   .container button {
    outline: none;
    font-size: 1.2rem;
-   border: 1px solid rgb(35, 35, 35);
+   border: 2px solid rgb(35, 35, 35);
    margin: 2%;
    padding: 10px;
    border-radius: 8px;
@@ -67,6 +67,7 @@ header {
     flex-direction: column;
     word-wrap: break-word;
     word-break: break-all;
+    border: 3px solid black;
   }
 
   .output .previous-operand{
