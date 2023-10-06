@@ -26,18 +26,16 @@ header {
     font-size: 15px;
   }
 
- 
   .container{
     display: grid;
     justify-content: center;
     align-items: center;
     width:310px;
-    height:470px;
+    height:475px;
     margin:0 auto; /* Center horizontally */
     border:2px solid black;
     grid-template-columns: repeat(4,75px);
     grid-template-rows: minmax(10px,auto) repeat(4,75px);
-    margin-bottom: 3%;
 
   }
 
