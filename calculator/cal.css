@@ -32,8 +32,8 @@ header {
     display: grid;
     justify-content: center;
     align-items: center;
-    width: 330px;
-    height: 455px;
+    max-width: 330px;
+    max-height: 455px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
     grid-template-columns: repeat(4,80px);
