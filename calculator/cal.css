@@ -60,7 +60,6 @@ header {
     font-weight: 500;
   }
   .output{
-    background-color:aqua;
     grid-column: 1 / -1;
     display: flex;
     align-items: flex-end;
@@ -68,7 +67,6 @@ header {
     flex-direction: column;
     word-wrap: break-word;
     word-break: break-all;
-    
   }
 
   .output .previous-operand{
