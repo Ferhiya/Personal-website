@@ -1,11 +1,11 @@
-body{
-    text-align: center;
-    background-color: #f7f7f7;
-
-}
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #CBCE91FF, rgb(118, 204, 241), rgb(230, 247, 133));
+  }
+  
 header {
     background-color: #f7f7f7;
-   
     color: black;
     padding: 3px;
     text-align: center;
@@ -29,17 +29,61 @@ header {
  
   .container{
     background-color: #f7f7f7;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    width: 600px;
-    height: 400px;
+    width: 330px;
+    height: 455px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
-  }
- 
+    grid-template-columns: repeat(4,80px);
+    grid-template-rows: minmax(10px,auto) repeat(4,80px);
 
+  }
+
+  .container button {
+   outline: none;
+   font-size: 1.5rem;
+   border: 1px solid rgb(35, 35, 35);
+   margin: 2%;
+   padding: 10px;
+   border-radius: 10px;
+
+  }
+  .container button:hover{
+    background-color:rgb(176, 176, 176);
+  }
+
+  .Controll-btn {
+    grid-column: span 2;
+    color: #adf802;
+    background-color: rgba(139, 0, 139, 0.8);
+   font-weight: bolder;
+  }
+  .output{
+    background-color:aqua;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    
+  }
+
+  .output .previous-operand{
+    color: rgba(255,255, 255, 0.75);
+    font-size: 1.3rem;
+   
+  }
+
+  .output .current-operand{
+    color: white;
+    font-size: 1.5rem;
+   
+  }
   
   input[type="text"] {
     padding: 10px;
@@ -48,19 +92,8 @@ header {
     border: 2px solid rgb(215, 215, 215);
   }
   
-  button{
-    width: 80px;
-    margin-top: 10px;
-    background-color: antiquewhite;
-    box-shadow: 3px 2px rgb(209, 218, 222);
-    padding: 1%;
-    border-radius: 4px;
-  }
 
-  #weatherInfo {
-    margin-top: 20px;
-  }
- 
+
 
 
   footer {
