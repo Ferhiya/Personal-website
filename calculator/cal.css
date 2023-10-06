@@ -10,7 +10,7 @@ header {
     padding: 3px;
     text-align: center;
     border-bottom: 1.5px solid black;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   
   nav ul {
@@ -32,18 +32,18 @@ header {
     display: grid;
     justify-content: center;
     align-items: center;
-    max-width: 330px;
-    max-height: 455px;
+    max-width: 320px;
+    max-height: 550px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
-    grid-template-columns: repeat(4,80px);
-    grid-template-rows: minmax(10px,auto) repeat(4,80px);
+    grid-template-columns: repeat(4,60px);
+    grid-template-rows: minmax(10px,auto) repeat(4,60px);
 
   }
 
   .container button {
    outline: none;
-   font-size: 1.5rem;
+   font-size: 1rem;
    border: 1px solid rgb(35, 35, 35);
    margin: 2%;
    padding: 10px;
@@ -102,9 +102,7 @@ header {
     left: 0;
     width: 100%;
     text-align: center;
-    padding: 10px;
     background-color: #f7f7f7;
-   
     color: black;
     border-top: 1.5px solid black;
   }
