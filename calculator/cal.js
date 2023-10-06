@@ -8,6 +8,37 @@ const previousOperandTextElem=document.querySelector('[previous-data]');
 const currentOperandTextElem=document.querySelector('[current-data');
 
 //read data function
+class calulator{
+    constructor(previousOperandTextElem,currentOperandTextElem){
+     this.previousOperandTextElem=previousOperandTextElem;
+     this.currentOperandTextElem=currentOperandTextElem;
+     this.clear;
+    }
+}
+
+//clear all data
+function clear() {
+}
+
+//delet number
+function Delete() {
+}
+
+//add numbers
+function appendNumber(number) {
+}
+
+//välj opartor
+function chooseOperation(operation) {
+}
+
+//räkna ut
+function compute() {
+}
+
+//visa resultat
+function updateDisplay() {
+}
 
 
 
