@@ -43,7 +43,7 @@ header {
 
   .container button {
    outline: none;
-   font-size: 1rem;
+   font-size: 1.3rem;
    border: 1px solid rgb(35, 35, 35);
    margin: 2%;
    padding: 10px;
@@ -56,9 +56,9 @@ header {
 
   .Controll-btn {
     grid-column: span 2;
-    color: #adf802;
-    background-color: rgba(139, 0, 139, 0.8);
-   font-weight: bolder;
+    background-color: aliceblue;
+    font-weight: 900;
+  
   }
   .output{
     background-color:aqua;
@@ -91,11 +91,7 @@ header {
     border-radius: 4px;
     border: 2px solid rgb(215, 215, 215);
   }
-  
-
-
-
-
+ 
   footer {
     position: fixed;
     bottom: 0;
