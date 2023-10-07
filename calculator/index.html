@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cal.css">
-    <script src="cal.js"></script>
+   
     <title>Document</title>
 </head>
 <body>
@@ -26,22 +26,22 @@
           <div current-data class="current-operand"> <p>Hey</p></div>
         </div>
         <button data-clear class="Controll-btn">Clear</button>
-        <button data-delete>DEL</button>
+        <button data-delete onclick="del()">DEL</button>
         <button data-operation>÷</button>
-        <button data-number>1</button>
-        <button data-number>2</button>
-        <button data-number>3</button>
-        <button data-operation="">*</button>
-        <button data-number>4</button>
-        <button data-number>5</button>
-        <button data-number>6</button>
-        <button data-operation>+</button>
-        <button data-number>7</button>
-        <button data-number>8</button>
-        <button data-number>9</button>
-        <button data-operation>-</button>
-        <button data-number>.</button>
-        <button data-number>0</button>
+        <button data-number onclick="Display(1)">1</button>
+        <button data-number onclick="Display(2)">2</button>
+        <button data-number onclick="Display(3)">3</button>
+        <button data-operation onclick="Display('*')">*</button>
+        <button data-number onclick="Display(4)">4</button>
+        <button data-number onclick="Display(5)">5</button>
+        <button data-number onclick="Display(6)">6</button>
+        <button data-operation onclick="Display('+')">+</button>
+        <button data-number onclick="Display(7)">7</button>
+        <button data-number onclick="Display(8)">8</button>
+        <button data-number onclick="Display(9)">9</button>
+        <button data-operation onclick="Display('-')">-</button>
+        <button data-number onclick="Display('.')">.</button>
+        <button data-number onclick="Display(0)">0</button>
         <button data-equals class="Controll-btn">=</button>
       </div>
     
@@ -53,5 +53,6 @@
     <footer>
         <p>&copy; 2023 Ferhiya Mohammed Abdullahi</p>
       </footer>
+      <script src="cal.js"></script>
 </body>
 </html>
