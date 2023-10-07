@@ -25,9 +25,9 @@
           <div previous-data class="previous-operand"> <p>Hi</p></div>
           <div current-data class="current-operand"> <p>Hey</p></div>
         </div>
-        <button data-clear class="Controll-btn">Clear</button>
+        <button data-clear onclick="clearText()" class="Controll-btn">Clear</button>
         <button data-delete onclick="del()">DEL</button>
-        <button data-operation>÷</button>
+        <button data-operation onclick="Display('÷')">÷</button>
         <button data-number onclick="Display(1)">1</button>
         <button data-number onclick="Display(2)">2</button>
         <button data-number onclick="Display(3)">3</button>
@@ -42,7 +42,7 @@
         <button data-operation onclick="Display('-')">-</button>
         <button data-number onclick="Display('.')">.</button>
         <button data-number onclick="Display(0)">0</button>
-        <button data-equals class="Controll-btn">=</button>
+        <button data-equals onclick="computeRes()" class="Controll-btn">=</button>
       </div>
     
      

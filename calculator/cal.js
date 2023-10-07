@@ -9,8 +9,10 @@
  
 
   //functions needed
-  function clear(){
+  function clearText(){
+    console.log(currentOperandTextElement);
     currentOperandTextElement.innerHTML="";
+    
   }
 
   function del() {
@@ -36,8 +38,8 @@
     
    }
 
-   function compute(){
-
+   function computeRes{
+   
    }
 
    function Display(number){
