@@ -4,7 +4,6 @@
   const equalsButton = document.querySelector('[data-equals]');
   const deleteButton = document.querySelector('[data-delete]');
   const allClearButton = document.querySelector('[data-clear]');
-  const previousOperandTextElement = document.querySelector('[previous-data]');
   const currentOperandTextElement = document.querySelector('[current-data]');
   //const calculator = new calculator(previousOperandTextElement, currentOperandTextElement);
  
@@ -15,7 +14,10 @@
   }
 
   function del() {
-  currentOperandTextElement.innerHTML="";
+  const currentOP=currentOperandTextElement.textContent;
+  const uppdateCurrentOp=currentOP.slice(0,-1);
+  console.log(uppdateCurrentOp);
+  currentOperandTextElement.textContent=uppdateCurrentOp;
    
   }
 
