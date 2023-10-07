@@ -38,8 +38,8 @@
     
    }
 
-   function computeRes{
-   
+   function computeRes(){
+
    }
 
    function Display(number){
