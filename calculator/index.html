@@ -22,33 +22,27 @@
       <div class="container">
 
         <div class="output">
-          <div previous-data class="previous-operand"> <p>Hi</p></div>
-          <div current-data class="current-operand"> <p>Hey</p></div>
+          <div display-data class="previous-operand"> <p></p></div>
         </div>
         <button data-clear onclick="clearText()" class="Controll-btn">Clear</button>
         <button data-delete onclick="del()">DEL</button>
-        <button data-operation onclick="Display('÷')">÷</button>
-        <button data-number onclick="Display(1)">1</button>
-        <button data-number onclick="Display(2)">2</button>
-        <button data-number onclick="Display(3)">3</button>
-        <button data-operation onclick="Display('*')">*</button>
-        <button data-number onclick="Display(4)">4</button>
-        <button data-number onclick="Display(5)">5</button>
-        <button data-number onclick="Display(6)">6</button>
-        <button data-operation onclick="Display('+')">+</button>
-        <button data-number onclick="Display(7)">7</button>
-        <button data-number onclick="Display(8)">8</button>
-        <button data-number onclick="Display(9)">9</button>
-        <button data-operation onclick="Display('-')">-</button>
-        <button data-number onclick="Display('.')">.</button>
-        <button data-number onclick="Display(0)">0</button>
+        <button data-operation onclick="Operation('÷')">÷</button>
+        <button data-number onclick="appendNumber(1)">1</button>
+        <button data-number onclick="appendNumber(2)">2</button>
+        <button data-number onclick="appendNumber(3)">3</button>
+        <button data-operation onclick="Operation('*')">*</button>
+        <button data-number onclick="appendNumber(4)">4</button>
+        <button data-number onclick="appendNumber(5)">5</button>
+        <button data-number onclick="appendNumber(6)">6</button>
+        <button data-operation onclick="Operation('+')">+</button>
+        <button data-number onclick="appendNumber(7)">7</button>
+        <button data-number onclick="appendNumber(8)">8</button>
+        <button data-number onclick="appendNumber(9)">9</button>
+        <button data-operation onclick="Operation('-')">-</button>
+        <button data-number onclick="appendNumber('.')">.</button>
+        <button data-number onclick="appendNumber(0)">0</button>
         <button data-equals onclick="computeRes()" class="Controll-btn">=</button>
       </div>
-    
-     
-      
-
-
 
     <footer>
         <p>&copy; 2023 Ferhiya Mohammed Abdullahi</p>
