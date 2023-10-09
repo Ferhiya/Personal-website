@@ -1,11 +1,10 @@
 body{
     text-align: center;
-    background-color: #f7f7f7;
-    background-image: linear-gradient(to right, pink , white);
+    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
 }
 header {
     background-color: #f7f7f7;
-    background-image: linear-gradient(to right, pink , white);
+    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
     color: black;
     padding: 3px;
     text-align: center;
@@ -71,7 +70,7 @@ header {
     text-align: center;
     padding: 10px;
     background-color: #f7f7f7;
-    background-image: linear-gradient(to right, pink , white);
+    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
     color: black;
     border-top: 1.5px solid black;
   }
