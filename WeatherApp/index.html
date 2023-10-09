@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Weater.css">
-    <script src="weater.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -21,24 +20,30 @@
       <div class="container">
         <input type="text" id="cityInput" placeholder="Enter city name">
         
-        <button onclick="hämtaVäder()" id="searchButton">Search</button>
+        <button onclick="sökVäder()" id="searchButton">Search</button>
+        <div id="stadsinfo">
+          <p id="stad"> </p>
+          <p>
+            <span id="date"></span>&nbsp; <!-- Add a non-breaking space between the elements -->
+            <span id="time"></span>
+          </p>
+        </div>
         
-        
+
+        <div id="Weatherimage"> 
+          <img id="Weatherimg" src="/img/main-qimg-7ac47039e07c396328124730f3573f66-lq.jpg">
+        </div>
         <div id="weatherInfo">
           <!-- Weather data will be displayed here -->
           <p id="temp"></p>
           <p id="cond"></p>
-         
         </div>
       </div>
     
-
-
-
-
-
     <footer>
         <p>&copy; 2023 Ferhiya Mohammed Abdullahi</p>
       </footer>
+
+      <script src="weater.js" defer></script>
 </body>
 </html>

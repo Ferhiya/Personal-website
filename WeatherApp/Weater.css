@@ -31,11 +31,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    width: 600px;
+    width: 400px;
     height: 400px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
+    
   }
  
 
@@ -57,10 +57,31 @@ header {
   }
 
   #weatherInfo {
-    margin-top: 20px;
+    border-top:2px solid black;
+    width: 400px;
+    height:100px;
+    
   }
  
+#Weatherimg{
+  width: 400px;
+  height: 178px;
+}
 
+#stadsinfo{
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+ justify-content:space-around;
+ position: relative;
+}
+#stadsinfo p {
+  font-size:1rem;
+  margin: 0 130px; /* Lägg till margin på sidorna av p-elementen */
+}
+p span {
+  margin-left:6px; /* Adjust the value to control the spacing */
+}
 
   footer {
     position: fixed;

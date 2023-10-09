@@ -19,12 +19,36 @@ let cities = [
     {name: "Stockholm", lat: 59.325, lng: 18.05, temp: 0, conditions: 0},
     {name: "Göteborg", lat: 57.70887000, lng: 11.97456000, temp: 0, conditions: 0}
 ];
+const currentDate = new Date();
+
+// Array med dagar
+const daysOfWeek = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
+
+// Hämta dagens namn (stavat ut)
+const dayName = daysOfWeek[currentDate.getDay()];
+
+const currentTime = new Date();
+
+// Hämta timmar, minuter och sekunder
+const hours = currentTime.getHours();
+const minutes = currentTime.getMinutes();
+
+// Formatera tid i HH:MM:SS-format
+const formattedTime = `${hours}:${minutes}`;
+
+var Displaydate;
 var weatherImg;
+var DisplayCity;
+
 function init() {
     testElem = document.getElementById("test");
     knappar = document.getElementsByClassName("knappar");
     weatherElem = document.getElementById("väder2");
     weatherImg = document.getElementById("väder");
+    Displaydate=document.getElementById("date");
+    DisplayCity=document.getElementById("stad");
+
+  
     for (let i = 0; i < cities.length; i++) {
         requestTemp(cities[i]);
     }
@@ -36,6 +60,12 @@ function init() {
 }
 window.addEventListener("load", init);
 
+
+
+function sökVäder() {
+    var stadsName = document.getElementById("cityInput").value;
+    hämtaVäder(stadsName);
+}
 //Start requestTemp
 function requestTemp(city) {
     
@@ -45,7 +75,7 @@ function requestTemp(city) {
     request.send(null);
     request.onreadystatechange = function() {
         if (request.readyState == 4) {
-            if (request.status == 200); {
+            if (request.status == 200) {
             getTemp(request.responseText, city);
             }
         }
@@ -59,46 +89,49 @@ function getTemp(response, city) {
     city.temp = params[10].values[0];
     city.conditions = params[18].values[0];
 
-
+    visaStandardStadsVäder("stockholm")
 }
 
-function hämtaVäder() {
-    // Hämta stadsnamnet från input-fältet
-    var stadsName=document.getElementById("cityInput").value;
-    var found=false;
+function visaStandardStadsVäder(stad)
+{
+    hämtaVäder(stad);
+   
+}
+function hämtaVäder(stadsName) {
+    //Display dagens datum
+    Displaydate.textContent=dayName+" Kl "+formattedTime;
+    DisplayCity.textContent=stadsName;
+    var found = false;
     
-
     // Sök efter staden i din cities-array
-    for(var i=0; i < cities.length; i++)
-    {
-           // Sök efter staden i din cities-array
-      if (cities[i].name.toLowerCase() === stadsName.toLowerCase())
-      
-      {
-        var city=cities[i];
-        var väderElement=document.getElementById("weatherInfo");
+    for (var i = 0; i < cities.length; i++) {
+        // Sök efter staden i din cities-array
+        
+        if (cities[i].name.toLowerCase() === stadsName.toLowerCase()) {
 
-        //temp
-        var väderElem=document.getElementById("temp");
-        väderElem.textContent="Temperatur: "+ Math.round(city.temp) + "°C";
+            var city = cities[i];
+            var väderElement = document.getElementById("weatherInfo");
 
-        //condition
-        var väderCon=document.getElementById("cond");
-        väderCon.textContent="Förhållande: "+ city.conditions;
-        document.getElementById("cityInput").value = "";
+            //temp
+            var väderElem = document.getElementById("temp");
+            väderElem.textContent = "Temperaturen är: " + Math.round(city.temp) + "°C";
 
-        found = true;
-      
-        return; // Avsluta sökningen när staden har hittats
-      }
-    }  
+            //condition
+            var väderCon = document.getElementById("cond");
+            väderCon.textContent = "Förhållandet är: " + city.conditions;
+            document.getElementById("cityInput").value = "";
+
+            found = true;
+
+            return; // Avsluta sökningen när staden har hittats
+        }
+    }
 
     // Om staden inte hittades
-  
-     // If the city was not found
-     if (!found) {
-        var väderElement=document.getElementById("weatherInfo");
-        väderElement.innerHTML="<p>Väder information om staden finns inte</p>";
+    // If the city was not found
+    if (!found) {
+        var väderElement = document.getElementById("weatherInfo");
+        väderElement.innerHTML = "<p>Väder information om staden finns inte</p>";
         // Clear the input field after the search
         document.getElementById("cityInput").value = "";
         return;
