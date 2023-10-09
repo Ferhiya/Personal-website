@@ -1,10 +1,10 @@
 body{
     text-align: center;
-    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
+    background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
 }
 header {
     background-color: #f7f7f7;
-    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
+    background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
     color: black;
     padding: 3px;
     text-align: center;
@@ -57,10 +57,8 @@ header {
   }
 
   #weatherInfo {
-    border-top:2px solid black;
     width: 400px;
-    height:100px;
-    
+    height:100px; 
   }
  
 #Weatherimg{
@@ -91,7 +89,7 @@ p span {
     text-align: center;
     padding: 10px;
     background-color: #f7f7f7;
-    background: linear-gradient(to right, rgb(167, 231, 236) , pink, rgb(167, 231, 236));
+    background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
     color: black;
     border-top: 1.5px solid black;
   }
