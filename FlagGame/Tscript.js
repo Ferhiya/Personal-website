@@ -1,43 +1,5 @@
-/*
-document.addEventListener("DOMContentLoaded", function () {
-    const imageContainer = document.querySelector(".image-container");
-    const randomImage = document.getElementById("random-image");
-    const generateButton = document.getElementById("generate-button");
-  
-    const imageFolderPath = "img/"; // Replace with your image folder path
-    const imageExtension = ".jpg"; // Replace with the image file extension you're using
-  
-    // Function to generate a random number between min and max
-    function getRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-  
-    // Function to generate a random image
-    function generateRandomImage() {
-      const randomImageIndex = getRandomNumber(1, 3); // Adjust the range based on your image count
-      const imagePath = `${imageFolderPath}${randomImageIndex}${imageExtension}`;
-      randomImage.src = imagePath;
-      randomImage.alt = "Random Image";
-    }
-  
-    generateButton.addEventListener("click", generateRandomImage);
-  
-    // Generate a random image on page load
-    generateRandomImage();
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-    const nameInput = document.getElementById("name");
-    const output = document.getElementById("output");
-  
-    nameInput.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault(); // Prevent Enter key from adding a new line
-        output.textContent = `Hello, ${nameInput.value}!`;
-        nameInput.value = ""; // Clear the input
-      }
-    });
-  });*/
-  const flagImg = document.getElementById("flag");
+
+const flagImg = document.getElementById("flag");
 const guessInput = document.getElementById("guess");
 const submitButton = document.getElementById("submit");
 const resultMessage = document.getElementById("result");

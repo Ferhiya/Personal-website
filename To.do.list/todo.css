@@ -86,109 +86,133 @@ body {
   
 
   /*style weekplaner*/
-/* Style for the table */
-table {
-    font-family: sans-serif;
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: separate;
-    table-layout: fixed;
-  }
-  
-  /* Style for table header */
-  table th {
-    background: #f6eeee;
-    color: #060606;
-    padding: 0.3em;
-    overflow: hidden;
-    text-align: center;
-    vertical-align: middle;
-    border-left: 1px solid #0c0c0c;
-  }
-  
-  /* Style for first and last header cells */
-  table th:first-child {
-    border-radius: 3px 0 0 0;
-  }
-  
-  table th:last-child {
-    border-radius: 0 3px 0 0;
-  }
-  
-  /* Style for day and icon elements in header */
-  table th .day {
-    display: block;
-    font-size: 1em;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    margin: 0 auto 3px;
-    padding: 3px;
-    line-height: 1.5;
-  }
-  
-  /* Active day style */
-  table th .day.active {
-    background: #f6eeee;
-    color: #0f0f0f;
-  }
-  
-  /* Style for table body */
-  table tbody {
-    background: #f6eeee;
-  }
+/* Reset default margin and padding */
+/* CSS för att placera dagar i top som rubrik och tid på vänster sida */
 
-  /* Style for table cells */
-  table td {
-    text-align: center;
-    vertical-align: middle;
-    border-left: 1px solid #0c0c0c;
-    position: relative;
-    height: 30px; /* Adjusted cell height for time blocks */
-    cursor: pointer;
-  }
+/* Återställ standardmarginaler och fyllning för alla element */
+* {
+  margin: 0;
+  padding: 0;
+}
 
-  /* Style for hour cells */
-  table td.hour {
-    font-size: 1.5em;
-    padding: 0;
-    color: #f5865d;
-    background: #f3dfdf;
-    border-collapse: separate;
-    min-width: 80px;
-    cursor: default;
-  }
-  
-  /* Rotate text inside hour cells */
-  @media (max-width: 60em) {
-    /* Adjusted cell height for smaller screens */
-    table td {
-      height: 30px; /* Adjusted cell height for time blocks */
-    }
-  
-    table tbody tr td.hour {
-      font-size: 1.2em;
-      min-width: 60px;
-    }
-  
-    table th .day.active {
-      font-size: 1em;
-    }
-  }
-  
-  @media (max-width: 27em) {
-    /* Further adjustments for smaller screens */
-    table td {
-      height: 20px; /* Adjusted cell height for time blocks */
-    }
-  
-    table tbody tr td.hour {
-      font-size: 1em;
-      min-width: 40px;
-    }
-  
-    table th .day.active {
-      font-size: 0.8em;
-    }
-  }
-  
+/* Skapa en mjuk rosa bakgrund för hela sidan */
+body {
+  background-color: #FFD1DC;
+  font-family: Arial, sans-serif;
+}
+
+/* Container för schemat */
+.schedule-container {
+  text-align: center;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Rubrikstil */
+h1 {
+  font-size: 24px;
+  color: #FF5483;
+  margin-bottom: 20px;
+}
+
+/* Container för schemat */
+.schedule {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+/* Stil för dagar */
+.days {
+  display: flex;
+  flex-direction: row;
+  background-color: #FFC3D4;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.day {
+  flex: 1;
+  text-align: center;
+  border-left: 1px solid black;
+}
+
+/* Stil för tidsspor */
+.time-slots {
+  margin-top:25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: bold;
+
+}
+
+.time-slot {
+  background-color: #FFC3D4;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+/* Grid för schemat */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Stil för uppgifter */
+.task {
+  background-color: #FFB5C5;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Stil för uppgiftsinputs */
+.task-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border: 1px solid #FF5483;
+  border-radius: 5px;
+}
+
+select {
+  padding: 5px;
+  border: 1px solid #FF5483;
+  border-radius: 5px;
+  background-color: #FFC3D4;
+  font-weight: bold;
+}
+
+input[type="color"] {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #FF5483;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Hover-effekt för knappen */
+button:hover {
+  background-color: #FF396B;
+}
