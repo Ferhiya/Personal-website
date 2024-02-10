@@ -46,6 +46,7 @@ function init() {
     weatherElem = document.getElementById("väder2");
     weatherImg = document.getElementById("väder");
     Displaydate=document.getElementById("date");
+    DisplayTime=document.getElementById("time");
     DisplayCity=document.getElementById("stad");
 
   
@@ -99,8 +100,8 @@ function visaStandardStadsVäder(stad)
 }
 function hämtaVäder(stadsName) {
     //Display dagens datum
-    Displaydate.textContent=dayName+" Kl "+formattedTime;
-    DisplayCity.textContent=stadsName;
+    Displaydate.textContent= dayName + " Klockan" +formattedTime ;
+    DisplayCity.textContent="Stad: "+stadsName;
     var found = false;
     
     // Sök efter staden i din cities-array
@@ -120,7 +121,8 @@ function hämtaVäder(stadsName) {
             var väderCon = document.getElementById("cond");
             väderCon.textContent = "Förhållandet är: " + city.conditions;
             document.getElementById("cityInput").value = "";
-
+// Update weather image based on temperature
+            updateWeatherImage(city.temp);
             found = true;
 
             return; // Avsluta sökningen när staden har hittats
@@ -137,3 +139,32 @@ function hämtaVäder(stadsName) {
         return;
     }
 }
+
+// Function to update the weather image based on temperature
+function updateWeatherImage(temperature) {
+    const imgElement = document.getElementById('Weatherimg');
+    
+    let imgSrc = "/img/startweather.jpg"; // Default image
+  
+    // Check temperature and update image source accordingly
+    if (temperature > 10) {
+      imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
+    } 
+    else if (temperature < 0) {
+      imgSrc = "/img/coldDays.jpg"; // Cold weather image
+    }
+
+    else{
+        imgSrc = "/img/OkDay.jpg"; // Cold weather image
+    }
+  
+    // Update the image source
+    imgElement.src = imgSrc;
+  }
+  
+  // Example temperature value (replace this with actual temperature data)
+  const temperature = 20;
+  
+  // Update the weather image based on the temperature
+  updateWeatherImage(temperature);
+  console.log(temperature);
