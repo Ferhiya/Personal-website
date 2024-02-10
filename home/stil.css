@@ -87,8 +87,13 @@ body {
     background-color: #f7f7f7;
     color: black;
   }
-
-  
+ol{
+  text-align: center;
+}
+  li{
+    list-style: none;
+    align-items: center;
+  }
   
   
   
