@@ -81,3 +81,13 @@ footer {
   height: auto;
 }
 
+.hidden{
+  visibility: hidden;
+}
+
+.hidden2{
+  visibility: hidden;
+}
+.hidden3{
+  visibility: hidden;
+}
