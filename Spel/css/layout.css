@@ -1,0 +1,103 @@
+@charset "UTF-8";
+/* ----- Grundstil för webbsidan ----- */
+
+html, body, nav, header, main, aside, footer, article, section, div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+	height: 100%;
+	user-select: none;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	margin: 0;
+	background-color: #f7e8e8;
+	padding-bottom: 60px; /* Add padding to create space for the fixed footer */
+  }
+  
+  header {
+	background-color: #f7f7f7;
+	color: black;
+	padding: 3px;
+	text-align: center;
+	border-bottom: 1.5px solid black;
+  }
+  
+  nav ul {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+  }
+  
+  nav a {
+	color: black;
+	text-decoration: none;
+	margin: 0 20px;
+	font-size: 14px;
+  }
+  
+  h1 {
+	margin-top: 20px;
+  }
+
+
+main {
+    margin-left: 20%;
+	padding: 10px;
+}
+main h2, main h3, main h4 {
+	color: #BC1E21;
+	font-style: italic;
+}
+main h2 {
+	border-bottom: 3px double #BC1E21;
+}
+
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+	background-color: #f7f7f7;
+	color: black;
+	border-top: 1.5px solid black;
+  }
+
+hr {
+	clear:both;
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	color: #000;
+}
+a:hover, a:active {
+	background-color: #FC6;
+}
+
+button {
+	font-size: 1em;
+	background-color: #FEC;
+	border-radius: 10px;
+}
+button:hover {
+	background-color: #FC6;
+}
+
+@media screen and (max-width:400px) {
+	header h1, header h2, header h3 {
+		font-size: 1em;
+	}
+}
