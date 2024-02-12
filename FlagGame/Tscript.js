@@ -14,9 +14,13 @@ const Flags =[
 { name:"denmark", src: "img/Denmark.jpg"},
 { name:"sweden", src: "img/Sweden.jpg"},
 { name:"finland", src: "img/Finland.jpg"},
-{ name:"italy", src: "img/Italy.jpg"},
-{ name:"germnay", src: "img/Germany.jpg"},
+{ name:"italy", src: "img/Italy.png"},
+{ name:"germany", src: "img/Germany.jpg"},
 { name:"great britan", src:"img/Great-Britian.jpg"},
+{ name:"japan", src:"img/japan.png"},
+{ name:"china", src:"img/china.jpg"},
+{ name:"India", src:"img/india.png"},
+{ name:"saudi arabia", src:"img/Flag_of_Saudi_Arabia.png"},
 ]
 
 //Create a function to generate a random flag object from the array.
