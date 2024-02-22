@@ -71,7 +71,6 @@ section.landing {
   justify-content: space-between;
   margin-top: 50px;
 }
-
 .landing_product {
   width: 30%;
   text-align: center;
@@ -81,25 +80,46 @@ section.landing {
 
 .landing_product img {
   width: 80%;
-  border-radius: 5px;
+  border-radius: 30px;
   margin-bottom: 10px;
   transition: transform 0.5s ease; /* Add transition for smooth flipping effect */
 }
 
-.landing_product:hover img {
-  transform: rotateY(180deg); /* Rotate the image on hover */
+.landing_product .front {
+  transform-style: preserve-3d; /* Preserve the 3D transformation */
+  backface-visibility: hidden; /* Hide the back face during the flip */
+}
+
+.landing_product .back {
+  transform-style: preserve-3d; /* Preserve the 3D transformation */
+  backface-visibility: hidden; /* Hide the back face during the flip */
+  transform: rotateY(180deg); /* Initially hide the back face */
+  display: none; /* Initially hide the back face */
+}
+
+.landing_product:hover .front {
+  transform: rotateY(-180deg); /* Rotate the front face on hover */
+  display: none; /* Hide the front face on hover */
+}
+
+.landing_product:hover .back {
+  transform: rotateY(0deg); /* Rotate the back face on hover */
+  display: block; /* Show the back face on hover */
+}
+
+.landing_product .front, .landing_product .back {
+  position: absolute; /* Ensure proper positioning */
+  top: 0; /* Align with the top of the container */
+  left: 0; /* Align with the left of the container */
+  width: 100%; /* Take up the full width of the container */
 }
 
 .landing_product h3,
 .landing_product p {
-  opacity: 0; /* Hide the product details by default */
+  opacity: 1; /* Show the product details all the time */
   transition: opacity 0.5s ease; /* Add transition for smooth fading effect */
 }
 
-.landing_product:hover h3,
-.landing_product:hover p {
-  opacity: 1; /* Show the product details on hover */
-}
 
 
 
