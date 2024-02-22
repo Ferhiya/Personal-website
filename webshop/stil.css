@@ -1,100 +1,192 @@
-/* Reset some default styles */
 body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  p,h1{
-    text-align: center;
-  }
-  
-  /* Basic styling */
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  header {
-    background-color: #f7f7f7;
-    color: black;
-    padding: 3px;
-    text-align: center; /* Center text horizontally */
-    font-size: 15px;
-   
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center; /* Center list items horizontally */
-    margin-bottom: 10px;
-  }
-  
-  nav a {
-    color:black;
-    text-decoration: none;
-    margin: 0 20px;
-    font-size: 15px;
-  }
-  
-  main {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    border-top:1.5px solid black;
-    border-bottom:1.5px solid black;
-   
-  }
-  
-  .left-section,
-  .right-section {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    border-left: 1.5px solid black;
-    border-right: 1.5px solid black;
-  
-  }
-  
-  .middle-section {
-    flex: 2;
-    background-color: #f7f7f7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 14px;
-  }
-  
-  .left-section img{
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-  }
-  .right-section img {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-  }
-  
-  footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #f7f7f7;
-    color: black;
-  }
-ol{
-  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: fantasy;
 }
-  li{
-    list-style: none;
-    align-items: center;
-  }
-  
-  
-  
-  
+
+header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 50px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #0c0c0c;
+  font-family: fantasy;
+  font-size: 2rem;
+}
+
+.brand-pitch {
+  display: flex;
+  align-items: center;
+  background-image: url('../img/429330971_242162718964199_418126419109675040_n.jpg'); /* Adjust the path to your image */
+  background-size: cover;
+  background-position: top; /* Show only the top portion of the background image */
+  height: 300px; /* Adjust the height as needed */
+  text-align: center;
+  padding: 50px 0;
+  position: fixed;
+  width: 100%;
+  top: 70px; /* Adjust this value based on the height of the header */
+}
+
+.pitch-container {
+  width: 50%; /* Set the width of the text container */
+  padding: 0 20px; /* Adjust the padding as needed */
+  text-align: left; /* Align text to the left */
+}
+
+.pitch-container h1,
+.pitch-container p {
+  text-align: left; /* Ensure both heading and paragraph text are aligned to the left */
+  font-size: 2rem;
+font-family: fantasy;
+}
+
+/*middle secton*/
+section.landing {
+  text-align: center;
+  padding: 500px 0px 50px; /* Adjust top padding as needed */
+}
+.gallery {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.landing_product {
+  width: 30%;
+  text-align: center;
+  margin-bottom: 20px;
+  perspective: 1000px; /* Add perspective for 3D effect */
+}
+
+.landing_product img {
+  width: 80%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: transform 0.5s ease; /* Add transition for smooth flipping effect */
+}
+
+.landing_product:hover img {
+  transform: rotateY(180deg); /* Rotate the image on hover */
+}
+
+.landing_product h3,
+.landing_product p {
+  opacity: 0; /* Hide the product details by default */
+  transition: opacity 0.5s ease; /* Add transition for smooth fading effect */
+}
+
+.landing_product:hover h3,
+.landing_product:hover p {
+  opacity: 1; /* Show the product details on hover */
+}
+
+
+
+
+.order-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.product_gallery{
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 50px 50px; /* Adjust top padding as needed */
+}
+.product {
+  width: 30%;
+  text-align: center;
+  margin-bottom: 20px;
+  perspective: 1000px; /* Add perspective for 3D effect */
+}
+
+.product img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: transform 0.5s ease; /* Add transition for smooth flipping effect */
+}
+
+.product .front {
+  transform-style: preserve-3d; /* Preserve the 3D transformation */
+  backface-visibility: hidden; /* Hide the back face during the flip */
+}
+
+.product .back {
+  transform-style: preserve-3d; /* Preserve the 3D transformation */
+  backface-visibility: hidden; /* Hide the back face during the flip */
+  transform: rotateY(180deg); /* Initially hide the back face */
+  display: none; /* Initially hide the back face */
+}
+
+.product:hover .front {
+  transform: rotateY(-180deg); /* Rotate the front face on hover */
+  display: none; /* Hide the front face on hover */
+}
+
+.product:hover .back {
+  transform: rotateY(0deg); /* Rotate the back face on hover */
+  display: block; /* Show the back face on hover */
+}
+
+.product h3,
+.product p {
+  opacity: 1; /* Show the product details all the time */
+  transition: opacity 0.5s ease; /* Add transition for smooth fading effect */
+}
+
+
+
+.order-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
