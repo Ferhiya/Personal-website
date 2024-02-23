@@ -8,7 +8,6 @@ header {
   background-color: #f0f0f0;
   padding: 20px;
   text-align: center;
-  position: absolute;
   width: 100%;
 }
 
@@ -43,7 +42,7 @@ nav ul li a {
   height: 300px; /* Adjust the height as needed */
   text-align: center;
   padding: 50px 0;
-  position: fixed;
+  /*position: fixed; */
   width: 100%;
   top: 70px; /* Adjust this value based on the height of the header */
 }
@@ -64,7 +63,7 @@ font-family: fantasy;
 /*middle secton*/
 section.landing {
   text-align: center;
-  padding: 500px 0px 50px; /* Adjust top padding as needed */
+  padding: 50px 0px 100px; /* Adjust top padding as needed */
 }
 .gallery {
   display: flex;
@@ -108,7 +107,7 @@ section.landing {
 }
 
 .landing_product .front, .landing_product .back {
-  position: absolute; /* Ensure proper positioning */
+  /*position: fixed; /* Ensure proper positioning */
   top: 0; /* Align with the top of the container */
   left: 0; /* Align with the left of the container */
   width: 100%; /* Take up the full width of the container */
@@ -156,7 +155,7 @@ footer {
 .product_gallery{
   display: flex;
   justify-content: space-between;
-  padding: 100px 50px 50px; /* Adjust top padding as needed */
+  padding: 50px 50px 150px; /* Adjust top padding as needed */
 }
 .product {
   width: 30%;
@@ -166,7 +165,7 @@ footer {
 }
 
 .product img {
-  width: 100%;
+  width: 80%;
   border-radius: 5px;
   margin-bottom: 10px;
   transition: transform 0.5s ease; /* Add transition for smooth flipping effect */
