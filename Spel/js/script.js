@@ -119,10 +119,11 @@ function newTiles(){
 // Touch start event handler
 function touchstartTiles(e) {
     e.preventDefault();
-    touchX = e.touches[0].clientX;
-    touchY = e.touches[0].clientY;
+    touchX = e.changedTouches[0].clientX;
+    touchY = e.changedTouches[0].clientY;
     this.style.opacity = "0.5"; // Change opacity to indicate touch
-
+    e.dataTransfer.setData("text",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
+  
       // Store the reference to the tile being dragged
       dragtile = this;
      // Add event listeners for drag and drop on board elements
@@ -141,8 +142,8 @@ function touchmoveTiles(e) {
     e.preventDefault();
     // Ensure that only one touch event is being handled
     if (e.touches.length === 1) {
-        let newX = e.touches[0].clientX;
-        let newY = e.touches[0].clientY;
+        let newX = e.changedTouches[0].clientX;
+        let newY = e.changedTouches[0].clientY;
         let deltaX = newX - touchX;
         let deltaY = newY - touchY;
 
@@ -207,9 +208,10 @@ function dragendTiles(e){
 
  //släpper brickorna över vald ruta på board
 // Function to handle dropping tiles on the board
+// Function to handle dropping tiles on the board
 function tilesoverBoard(e) {
     e.preventDefault(); // Prevents default functions
-
+   
     // If the drop event is triggered
     if (e.type == "drop") {
         // Read the id of the dragged tile from dataTransfer
@@ -235,6 +237,13 @@ function tilesoverBoard(e) {
 
         // Disable pointer events for the dragged tile
         dragtile.style.pointerEvents = "none";
+
+        // Check if there are any empty tiles left on the board
+        let board = document.getElementById("board");
+        if (board.getElementsByClassName("empty").length == 0) {
+            // Re-enable the "Nya Brickor" button
+            newTilesBtn.disabled = false;
+        }
     }
 
     // Change the background color of the board element on dragover
@@ -252,14 +261,17 @@ function tilesoverBoard(e) {
     if (board.getElementsByClassName("empty").length == 0) {
         // Call finalCounter function when the board is full
         finalCounter();
+        // Re-enable the "Nya Brickor" button after the game is finished
+        newTilesBtn.disabled = false;
     }
+    newTilesBtn.disabled = false;
 }
 
 
 //räknar ihop poängen i slutet
 function finalCounter(){
     let Points=0; //börjar räkna poängen på noll
-     
+    newTilesBtn.disabled = true;
      //function för att kolla om brickorna är stiggande
     for (let i= 1; i <= 8; i++){
         let marktiles=document.getElementsByClassName("s"+i);
