@@ -10,6 +10,8 @@ var countGamesElem; //referar till elementet för att räkna spelomgång
 var totpointsElem; //referar till elementet för att räkna poängen
 var countGames=0;  //räknar antal spelomgångar
 var totPoints=0;  //referar till poängen
+// Global variables
+var dragtile;
 
 
 
