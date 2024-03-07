@@ -126,6 +126,10 @@ function dragstartTiles(e){
         boardElem[i].addEventListener("dragleave", tilesoverBoard);
     }
 
+    //toush screens
+
+    
+
 
 } //end dragstartTiles
 
@@ -275,56 +279,54 @@ function getData() {
     
 } //end localstorage
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners to draggable elements
+    var draggableElements = document.querySelectorAll('.draggable');
+    draggableElements.forEach(function(element) {
+        element.addEventListener('touchstart', touchstartDrag);
+        element.addEventListener('touchmove', touchmoveDrag);
+        element.addEventListener('touchend', touchendDrag);
+    });
 
-// Modify the touchEvent function to simulate touch events for dragging and dropping tiles
-function touchEvent(element, type, identifier, pageX, pageY) {
-    var e,
-        touch,
-        touches,
-        targetTouches,
-        changedTouches;
+    var touchDragItem = null;
+    var touchX = null;
+    var touchY = null;
 
-    if (!document.createTouch) {
-        throw new Error('This will work only in Safari browser.');
+    function touchstartDrag(e) {
+        touchDragItem = this;
+        touchX = e.touches[0].pageX;
+        touchY = e.touches[0].pageY;
+        // Prevent default touch behavior to avoid conflicts
+        e.preventDefault();
     }
 
-    touch = document.createTouch(window, element, identifier, pageX, pageY, pageX, pageY);
-
-    if (type == 'touchend') {
-        touches = document.createTouchList();
-        targetTouches = document.createTouchList();
-        changedTouches = document.createTouchList(touch);
-    } else {
-        touches = document.createTouchList(touch);
-        targetTouches = document.createTouchList(touch);
-        changedTouches = document.createTouchList(touch);
+    function touchmoveDrag(e) {
+        if (!touchDragItem) return;
+        var dx = e.touches[0].pageX - touchX;
+        var dy = e.touches[0].pageY - touchY;
+        touchX = e.touches[0].pageX;
+        touchY = e.touches[0].pageY;
+        // Update position of the dragged element
+        touchDragItem.style.left = (touchDragItem.offsetLeft + dx) + 'px';
+        touchDragItem.style.top = (touchDragItem.offsetTop + dy) + 'px';
+        // Prevent default touch behavior to avoid conflicts
+        e.preventDefault();
     }
 
-    e = document.createEvent('TouchEvent');
-    e.initTouchEvent(type, true, true, window, null, 0, 0, 0, 0, false, false, false, false, touches, targetTouches, changedTouches, 1, 0);
-
-    element.dispatchEvent(e); // Dispatch the touch event on the specified element
-}
-
-// Function to handle touch events for dragging new tiles
-function handleNewTileDrag(element, pageX, pageY) {
-    var identifier = new Date().getTime(); // Generate a unique identifier for the touch event
-    touchEvent(element, 'touchstart', identifier, pageX, pageY); // Simulate touchstart event
-    touchEvent(element, 'touchmove', identifier, pageX + 50, pageY + 50); // Simulate touchmove event for dragging
-    touchEvent(element, 'touchend', identifier, pageX + 50, pageY + 50); // Simulate touchend event when dropping the tile
-}
-
-// Example usage: Call this function when a new tile is created and needs to be dragged
-function createAndDragNewTile() {
-    var newTileElement = document.createElement('div'); // Create a new tile element
-    newTileElement.classList.add('new-tile'); // Add appropriate class to the new tile element
-    // Set the position of the new tile element on the screen
-    newTileElement.style.position = 'absolute';
-    newTileElement.style.left = '100px';
-    newTileElement.style.top = '100px';
-    document.body.appendChild(newTileElement); // Append the new tile element to the DOM
-    // Simulate touch events for dragging the new tile
-    handleNewTileDrag(newTileElement, 100, 100);
-}
-
-
+    function touchendDrag(e) {
+        if (!touchDragItem) return;
+        // Check if the dragged element is over a drop zone
+        var dropZone = document.elementFromPoint(touchX, touchY);
+        if (dropZone && dropZone.classList.contains('dropzone')) {
+            // Perform drop logic here, e.g., update data, trigger actions, etc.
+            // You may need to adjust this part based on your game logic
+            dropZone.appendChild(touchDragItem);
+        }
+        // Reset drag variables
+        touchDragItem = null;
+        touchX = null;
+        touchY = null;
+        // Prevent default touch behavior to avoid conflicts
+        e.preventDefault();
+    }
+});
