@@ -133,25 +133,25 @@ function touchmoveTiles(e) {
         let deltaX = newX - touchX;
         let deltaY = newY - touchY;
 
-        // Move the dragged tile based on touch movement
-        dragtile.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
+        // Store the reference to the tile being dragged
+    dragtile = this;
+    dragtile.classList.add("dragging"); // Add a class to indicate dragging
     }
 }
-// Touch end event handler
+// Touch end event handler for newTiles elements
 function touchendTiles(e) {
     e.preventDefault();
     this.style.opacity = "1"; // Reset opacity
+    dragtile.classList.remove("dragging"); // Remove dragging class
 
-    let deltaX = e.changedTouches[0].clientX - touchX;
-    let deltaY = e.changedTouches[0].clientY - touchY;
-
-    // Check if the touch event resulted in significant movement
-    if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
-        // If there was no significant movement, treat it as a click
-        dragstartTiles.call(this, e);
+    // Get the drop target (board element)
+    let dropTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    if (dropTarget && dropTarget.classList.contains("empty")) {
+        // Append the dragged tile to the drop target (board element)
+        dropTarget.appendChild(dragtile);
+        dragtile.style.transform = ""; // Reset tile position
     }
 }
-
 
 //aktiveras när brickorna börjar dras
 function dragstartTiles(e){   
