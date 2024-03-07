@@ -279,54 +279,25 @@ function getData() {
     
 } //end localstorage
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners to draggable elements
-    var draggableElements = document.querySelectorAll('.draggable');
-    draggableElements.forEach(function(element) {
-        element.addEventListener('touchstart', touchstartDrag);
-        element.addEventListener('touchmove', touchmoveDrag);
-        element.addEventListener('touchend', touchendDrag);
-    });
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
-    var touchDragItem = null;
-    var touchX = null;
-    var touchY = null;
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.className);
+}
 
-    function touchstartDrag(e) {
-        touchDragItem = this;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-        // Prevent default touch behavior to avoid conflicts
-        e.preventDefault();
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var target = ev.target;
+    if (target.tagName === 'IMG') {
+        target = target.parentNode; // Get the parent <td> if the target is an <img> element
     }
-
-    function touchmoveDrag(e) {
-        if (!touchDragItem) return;
-        var dx = e.touches[0].pageX - touchX;
-        var dy = e.touches[0].pageY - touchY;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-        // Update position of the dragged element
-        touchDragItem.style.left = (touchDragItem.offsetLeft + dx) + 'px';
-        touchDragItem.style.top = (touchDragItem.offsetTop + dy) + 'px';
-        // Prevent default touch behavior to avoid conflicts
-        e.preventDefault();
+    if (target.tagName === 'TD') {
+        // Check if the target is a <td> element
+        target.classList.remove('empty');
+        target.classList.add('filled');
+        target.innerHTML = '<img src="img/bricka.png" alt="bricka" class="' + data + '">';
     }
-
-    function touchendDrag(e) {
-        if (!touchDragItem) return;
-        // Check if the dragged element is over a drop zone
-        var dropZone = document.elementFromPoint(touchX, touchY);
-        if (dropZone && dropZone.classList.contains('dropzone')) {
-            // Perform drop logic here, e.g., update data, trigger actions, etc.
-            // You may need to adjust this part based on your game logic
-            dropZone.appendChild(touchDragItem);
-        }
-        // Reset drag variables
-        touchDragItem = null;
-        touchX = null;
-        touchY = null;
-        // Prevent default touch behavior to avoid conflicts
-        e.preventDefault();
-    }
-});
+}
