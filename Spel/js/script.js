@@ -151,13 +151,13 @@ function touchendTiles(e) {
     this.style.opacity = "1"; // Reset opacity
     dragtile.classList.remove("dragging"); // Remove dragging class
 
-    // Get the drop target (board element)
-    let dropTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-    if (dropTarget && dropTarget.classList.contains("empty")) {
-        // Append the dragged tile to the drop target (board element)
-        dropTarget.appendChild(dragtile);
-        dragtile.style.transform = ""; // Reset tile position
-    }
+   // Remove event listeners for drag and drop on board elements
+   let boardElems = document.querySelectorAll("#board img");
+   for (let i = 0; i < boardElems.length; i++) {
+       boardElems[i].removeEventListener("dragover", tilesoverBoard);
+       boardElems[i].removeEventListener("drop", tilesoverBoard);
+       boardElems[i].removeEventListener("dragleave", tilesoverBoard);
+   }
 }
 
 //aktiveras när brickorna börjar dras
