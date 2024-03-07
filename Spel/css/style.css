@@ -85,3 +85,37 @@ main {
 #moveCount {
 	font-size: 2em;
 }
+
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+	/* Adjustments for smaller screens go here */
+	#userInfo {
+	  width: 100%;
+	  float: none;
+	  margin: 0 auto; /* Center horizontally */
+	  text-align: center; /* Center text */
+	 
+	}
+	#board img {
+		width: 60px;
+		height: 60px;
+		
+	}
+
+	#newTiles img {
+		width: 60px;
+		height: 60px;
+	}
+
+	  
+	#control {
+	  float: none;
+	  text-align: center;
+	}
+	#message {
+	  font-size: 1em;
+	}
+	
+
+  }

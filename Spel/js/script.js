@@ -239,10 +239,14 @@ function finalCounter(){
 
  //funktion för Localstorage
 function getData() {
+    localStorage.clear();
+
     if (localStorage.fa223caUserinfo) {
        let dataArr=localStorage.fa223caUserinfo.split("&"); //skapar array av spelpoängen och spelomgångerna och delar upp det.
        totPoints= Number(dataArr[0]); //läser in spelpoäng 
        countGames= Number(dataArr[1]); //läser in spelomgångar
+
+       console.log(totPoints);
          
        totpointsElem.innerHTML=totPoints; //skriver ut sparad poäng från förragående spelomgång
        countGamesElem.innerHTML=countGames;  //skriver ut sparade spelomgångar från föregående spelomgång 
@@ -250,9 +254,14 @@ function getData() {
 
     }
 
-    else {totPoints=0; //skriver ut noll poäng när sidan laddas upp ifall inga tidigare spel poäng har sparatats.
-         countGames=0; //skriver ut noll spelomgångar när sidan laddas upp ifall inga tidigare spelomgångar har sparats.
+    else {
+        // If no data is found in local storage, reset scores to 0
+        totPoints = 0;
+        countGames = 0;
+        totpointsElem.innerHTML = 0;
+        countGamesElem.innerHTML = 0;
+        localStorage.clear();
     }
-    
+
     
 } //end localstorage

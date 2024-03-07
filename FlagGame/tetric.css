@@ -102,4 +102,37 @@ footer {
 
 
 
-
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+  /* Adjustments for smaller screens */
+  body {
+    text-align: center; /* Center everything in the middle */
+  }
+  
+  header {
+    width: 100%; /* Full width for the header */
+  }
+  
+  nav ul {
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+  }
+  
+  .flag-container {
+    width: 70%; /* Adjusted width for smaller screens */
+    margin: 0 auto; /* Center the flag container */
+  }
+  
+  #flag {
+    width: 100%; /* Full width for smaller screens */
+  }
+  
+  input[type="text"] {
+    width: calc(60% - 12px); /* Adjusted width for smaller screens */
+  }
+  
+  button {
+    display: block; /* Display the button as a block element */
+    margin: 10px auto; /* Center the button */
+  }
+}

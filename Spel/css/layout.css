@@ -96,8 +96,17 @@ button:hover {
 	background-color: #FC6;
 }
 
-@media screen and (max-width:400px) {
-	header h1, header h2, header h3 {
+@media only screen and (max-width: 600px){
+	header h1, header h2, header h3, p{
 		font-size: 1em;
 	}
+	body {
+		font-family: Arial, sans-serif;
+		text-align: center;
+		
+		padding-bottom: 60px; /* Add padding to create space for the fixed footer */
+		
+	  }
+	
+	
 }

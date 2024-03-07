@@ -93,3 +93,69 @@ header {
     color: black;
     border-top: 1.5px solid black;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    body {
+      text-align: center;
+      background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
+    }
+  
+    header {
+      background-color: #f7f7f7;
+      background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
+      color: black;
+      padding: 3px;
+      text-align: center;
+      border-bottom: 1.5px solid black;
+      margin-bottom: 20px;
+    }
+  
+    nav a {
+      margin: 0 10px; /* Adjusted margin for smaller screens */
+      font-size: 14px; /* Decreased font size for smaller screens */
+    }
+  
+    .container {
+      width: 85%; /* Adjusted width for smaller screens */
+      height: auto; /* Auto height for smaller screens */
+      margin: 0 auto; /* Center horizontally */
+    }
+  
+    input[type="text"] {
+      width: 80%; /* Adjusted width for smaller screens */
+      font-size: 1.5rem; /* Decreased font size for smaller screens */
+    }
+  
+    button {
+      width: 50%; /* Adjusted width for smaller screens */ 
+      margin-top: 10px;
+      font-size: 1.5rem; /* Decreased font size for smaller screens */
+    }
+  
+    #weatherInfo {
+      width: 90%; /* Adjusted width for smaller screens */
+      font-size: 2rem; /* Decreased font size for smaller screens */
+      margin-bottom: 10%;
+    }
+  
+    #Weatherimg {
+      width: 90%; /* Adjusted width for smaller screens */
+      height: auto; /* Auto height for smaller screens */
+    }
+  
+    #stadsinfo {
+      width: 90%; /* Adjusted width for smaller screens */
+      flex-direction: column; /* Changed flex-direction for smaller screens */
+      align-items: center; /* Center items vertically for smaller screens */
+    }
+  
+    #stadsinfo p {
+      font-size: 1.6rem; /* Decreased font size for smaller screens */
+    }
+  
+    footer {
+      background: linear-gradient(to right, rgb(167, 231, 236) , rgb(237, 217, 220), rgb(167, 231, 236));
+    }
+  }
+  
