@@ -307,4 +307,13 @@ function touchendTiles(e) {
     // Implement logic to drop the tile when touch ends
     // Check if the tile is dropped within a valid drop zone
     // Similar to your existing logic for dragendTiles function
+
+    // Add event listeners for touch events on tiles
+for (let i = 0; i < newTilesElems.length; i++) {
+    newTilesElems[i].addEventListener("touchstart", touchstartTiles);
+    newTilesElems[i].addEventListener("touchmove", touchmoveTiles);
+    newTilesElems[i].addEventListener("touchend", touchendTiles);
 }
+}
+
+
