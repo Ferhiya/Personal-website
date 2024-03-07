@@ -278,32 +278,31 @@ function getData() {
 
 //touce screens
 // Function to handle touchstart event for tiles
+// Function to handle touchstart event for tiles
 function touchstartTiles(e) {
     e.preventDefault();
     dragtile = this;
-    // Add event listeners for touch events on board elements
-    for (let i = 0; i < boardElem.length; i++) {
-        boardElem[i].addEventListener("touchmove", touchmoveTiles);
-        boardElem[i].addEventListener("touchend", touchendTiles);
-    }
+    // Add event listeners for touchmove and touchend on the document
+    document.addEventListener("touchmove", touchmoveTiles);
+    document.addEventListener("touchend", touchendTiles);
 }
 
+// Function to handle touchmove event for tiles
 function touchmoveTiles(e) {
     e.preventDefault();
-    // Implement the necessary logic to move the tile along with the touch movement
-    // You may need to update the tile's position based on touch coordinates
+    // Update the position of the tile based on touch coordinates
+    // Here's a basic example of how you can update the tile's position:
+    dragtile.style.left = e.touches[0].clientX - dragtile.offsetWidth / 2 + "px";
+    dragtile.style.top = e.touches[0].clientY - dragtile.offsetHeight / 2 + "px";
 }
-
 
 // Function to handle touchend event for tiles
 function touchendTiles(e) {
     e.preventDefault();
+    // Remove event listeners for touchmove and touchend from the document
+    document.removeEventListener("touchmove", touchmoveTiles);
+    document.removeEventListener("touchend", touchendTiles);
     // Implement logic to drop the tile when touch ends
-    // You may need to check if the tile is dropped within a valid drop zone
+    // Check if the tile is dropped within a valid drop zone
     // Similar to your existing logic for dragendTiles function
-    // Remove event listeners for touchmove and touchend from board elements
-    for (let i = 0; i < boardElem.length; i++) {
-        boardElem[i].removeEventListener("touchmove", touchmoveTiles);
-        boardElem[i].removeEventListener("touchend", touchendTiles);
-    }
 }
