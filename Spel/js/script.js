@@ -135,6 +135,8 @@ function touchstartTiles(e) {
              boardElem[i].addEventListener("drop", tilesoverBoard);
              boardElem[i].addEventListener("dragleave", tilesoverBoard);
          }
+         // Add the "filled" class to indicate that the tile is being dragged
+    this.classList.add("filled");
 }
 
 // Touch move event handler for newTiles elements
