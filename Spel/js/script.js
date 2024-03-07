@@ -46,7 +46,7 @@ function init(){
     //Add touch event listeners
     for (let i = 0; i < newTilesElems.length; i++) {
         newTilesElems[i].addEventListener("touchstart", touchstartTiles);
-        //newTilesElems[i].addEventListener("touchmove", touchmoveTiles);
+        newTilesElems[i].addEventListener("touchmove", touchmoveTiles);
         newTilesElems[i].addEventListener("touchend", touchendTiles);
     }
 
@@ -138,7 +138,23 @@ function touchstartTiles(e) {
 
 }
 
+// Touch move event handler for newTiles elements
+function touchmoveTiles(e) {
+    e.preventDefault();
+    // Ensure that only one touch event is being handled
+    if (e.touches.length === 1) {
+        let newX = e.changedTouches[0].clientX;
+        let newY = e.changedTouches[0].clientY;
+        let deltaX = newX - touchX;
+        let deltaY = newY - touchY;
 
+        // Move the dragged tile based on touch movement
+        dragtile.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
+
+        // Change color of the tile when being dragged
+        dragtile.style.backgroundColor = "#f00"; // Set the color as desired
+    }
+}
 // Touch end event handler
 function touchendTiles(e) {
     e.preventDefault();
