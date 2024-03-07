@@ -11,7 +11,9 @@ var totpointsElem; //referar till elementet för att räkna poängen
 var countGames=0;  //räknar antal spelomgångar
 var totPoints=0;  //referar till poängen
 
-
+//touch
+// Global variables
+var touchX, touchY; // To store touch coordinates
 
 
 // Initiering av globala variabler samt händelsehanterare.
@@ -39,6 +41,13 @@ function init(){
     newGameBtn.disabled=false; //knappen för nytt spel aktiverad
 	newTilesBtn.disabled=true; //knappen för nya brickor inaktiverad
     
+
+    //touch 
+    //Add touch event listeners
+    for (let i = 0; i < newTilesElems.length; i++) {
+        newTilesElems[i].addEventListener("touchstart", touchstartTiles);
+        newTilesElems[i].addEventListener("touchend", touchendTiles);
+    }
 
 } // End init
 window.addEventListener("load",init); // Se till att init aktiveras då sidan är inladdad
@@ -106,6 +115,29 @@ function newTiles(){
 
  //---------------------------------------
 //starts dragstartBricks
+// Touch start event handler
+function touchstartTiles(e) {
+    e.preventDefault();
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+    this.style.opacity = "0.5"; // Change opacity to indicate touch
+}
+
+// Touch end event handler
+function touchendTiles(e) {
+    e.preventDefault();
+    this.style.opacity = "1"; // Reset opacity
+
+    let deltaX = e.changedTouches[0].clientX - touchX;
+    let deltaY = e.changedTouches[0].clientY - touchY;
+
+    // Check if the touch event resulted in significant movement
+    if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {
+        // If there was no significant movement, treat it as a click
+        dragstartTiles.call(this, e);
+    }
+}
+
 
 //aktiveras när brickorna börjar dras
 function dragstartTiles(e){   
