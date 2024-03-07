@@ -95,6 +95,32 @@ ol{
     align-items: center;
   }
   
+/* Media screen for screens less than 600px */
+@media screen and (max-width: 600px) {
+  header {
+    font-size: 12px; /* Decrease font size for smaller screens */
+    
+  }
+
+  nav a {
+    margin: 0 10px; /* Adjust margin for smaller screens */
+    font-size: 12px; /* Decrease font size for smaller screens */
+    
+  }
+
+  h1, p{
+    font-size: 1em;
+  }
+
   
-  
+  .left-section img,
+  .right-section img {
+    width: 100%; /* Ensure images take full width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure images don't exceed container width */
+    image-rendering: -webkit-optimize-contrast; /* Improve image rendering quality */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+}
   
