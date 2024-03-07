@@ -126,11 +126,14 @@ function touchstartTiles(e) {
       // Store the reference to the tile being dragged
       dragtile = this;
      // Add event listeners for drag and drop on board elements
-     let boardElems = document.querySelectorAll("#board img");
-     for (let i = 0; i < boardElems.length; i++) {
-         boardElems[i].addEventListener("touchmove", touchmoveTiles);
-         boardElems[i].addEventListener("touchend", touchendTiles);
-     }
+     
+     
+     //handesehanterare för drag och drop eventet när brickorna släpps på vald ruta på board 
+         for (let i=0; i < boardElem.length; i++){
+             boardElem[i].addEventListener("dragover", tilesoverBoard);
+             boardElem[i].addEventListener("drop", tilesoverBoard);
+             boardElem[i].addEventListener("dragleave", tilesoverBoard);
+         }
 }
 
 // Touch move event handler for newTiles elements
@@ -156,20 +159,13 @@ function touchendTiles(e) {
     this.style.opacity = "1"; // Reset opacity
     dragtile.classList.remove("dragging"); // Remove dragging class
 
- // Remove event listeners for drag and drop on board elements
- let boardElems = document.querySelectorAll("#board img");
- for (let i = 0; i < boardElems.length; i++) {
-     boardElems[i].removeEventListener("touchmove", touchmoveTiles);
-     boardElems[i].removeEventListener("touchend", touchendTiles);
- }
-
- // Get the drop target (board element)
- let dropTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
- if (dropTarget && dropTarget.classList.contains("empty")) {
-     // Append the dragged tile to the drop target (board element)
-     dropTarget.appendChild(dragtile);
-     dragtile.style.transform = ""; // Reset tile position
- }   
+     // Remove event listeners for drag and drop on board elements
+     let boardElems = document.querySelectorAll("#board img");
+     for (let i = 0; i < boardElems.length; i++) {
+         boardElems[i].removeEventListener("dragover", tilesoverBoard);
+         boardElems[i].removeEventListener("drop", tilesoverBoard);
+         boardElems[i].removeEventListener("dragleave", tilesoverBoard);
+     }  
 
 }
 
@@ -210,52 +206,55 @@ function dragendTiles(e){
 //-------------------------------------------------
 
  //släpper brickorna över vald ruta på board
-function tilesoverBoard(e){
-    e.preventDefault(); //prevents default functins
-    
-    //släpper brickorna över vald ruta på board
-	if (e.type == "drop"){
-        let idNr=e.dataTransfer.getData("text"); //läser av info i id-taggen i vald bricka
-       
-        this.src="img/" + idNr + ".png"; //lägger in rätt bildbricka i spelplanen med hjälp av idNr och img taggen
+// Function to handle dropping tiles on the board
+function tilesoverBoard(e) {
+    e.preventDefault(); // Prevents default functions
 
-        this.id=idNr; //överför this informationen som finns på spelbrickan som dras till idNr så att det kan användas för att visa bildbrickan när det placeras på spelplanen 
+    // If the drop event is triggered
+    if (e.type == "drop") {
+        // Read the id of the dragged tile from dataTransfer
+        let idNr = e.dataTransfer.getData("text");
 
-        dragtile.src="img/empty.png"; //ersätter bildbrickan i rutan för nya brickor med en en tom bild, när bildbrickan börjar dras från rutan. 
-        dragtile.classList.remove("filled"); //tar bort classen filled i rutan för nya bildbrickor när bildbrickan dras. 
-        dragtile.classList.add("empty");  //lägger in classen tom så att rutan för nya bildbrickor aktiveras för en ny bildbricka.  
-        this.classList.remove("empty");//tar bort classen tom på spelplanen så att det kan ersättas med bildbrickans klass som är filled som ska dras över
-        this.classList.add("filled"); //fyller den tomma rutan på spelplanen med en bildbricka och classen filled som kommer med bildbrickan.  
-        this.style.background=""; //tom bakgrund i spelplanensrutor  
+        // Set the src attribute of the board element to the image corresponding to the id
+        this.src = "img/" + idNr + ".png";
 
-        dragtile.style.pointerEvents="none";
-	}
-      //byter bakgrundsfärgen i spelplanensrutan dragover
-    if (e.type == "dragover"){
+        // Set the id of the board element to the id of the dropped tile
+        this.id = idNr;
 
-       this.style.background="#9C9"; //grön bakgrund i spelplanenruta när bildbricka körs över ruta
-    }
-      //tar bort bakgrundsfärgen i spelrutan dragleave
-    if (e.type == "dragleave"){
-       this.style.background=""; 
-    }
+        // Reset the src and class of the dragged tile to empty
+        dragtile.src = "img/empty.png";
+        dragtile.classList.remove("filled");
+        dragtile.classList.add("empty");
 
-     //Skapar ny variabel för att kolla om rutorna för nya brickor är filled
-    let tiles=document.getElementById("newTiles")
-     //if-sats för att kolla om rutorna för nya brickor är full, om rutorna är tomma så återaktiveras knappen för nya brickor
-    if (tiles.getElementsByClassName("filled").length==0){
-    //aktiverar knappen för nya brickor när alla brickor är tomma
-    newTilesBtn.disabled=false;
-    }
-     //skapar ny variabel för att kolla om rutorna på spelplanen är tomma
-    let board=document.getElementById("board")
-     //if-sats för att kolla om det finns någon tomruta kvar på spelplanen.
-    if (board.getElementsByClassName("empty").length==0){
-       finalCounter(); //anroppar function finalcounter när spelplanen är full.
+        // Remove the empty class from the board element and add the filled class
+        this.classList.remove("empty");
+        this.classList.add("filled");
+
+        // Reset the background of the board element
+        this.style.background = "";
+
+        // Disable pointer events for the dragged tile
+        dragtile.style.pointerEvents = "none";
     }
 
-} //end BrickoverBoard
-//----------------------------------------------------------
+    // Change the background color of the board element on dragover
+    if (e.type == "dragover") {
+        this.style.background = "#9C9"; // Green background when tile is dragged over
+    }
+
+    // Remove the background color of the board element on dragleave
+    if (e.type == "dragleave") {
+        this.style.background = "";
+    }
+
+    // Check if all tiles on the board are filled
+    let board = document.getElementById("board");
+    if (board.getElementsByClassName("empty").length == 0) {
+        // Call finalCounter function when the board is full
+        finalCounter();
+    }
+}
+
 
 //räknar ihop poängen i slutet
 function finalCounter(){
