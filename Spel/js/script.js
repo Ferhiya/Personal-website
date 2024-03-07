@@ -125,7 +125,12 @@ function touchstartTiles(e) {
 
       // Store the reference to the tile being dragged
       dragtile = this;
-      dragtile.classList.add("dragging"); // Add a class to indicate dragging
+     // Add event listeners for drag and drop on board elements
+     let boardElems = document.querySelectorAll("#board img");
+     for (let i = 0; i < boardElems.length; i++) {
+         boardElems[i].addEventListener("touchmove", touchmoveTiles);
+         boardElems[i].addEventListener("touchend", touchendTiles);
+     }
 }
 
 // Touch move event handler for newTiles elements
@@ -151,13 +156,21 @@ function touchendTiles(e) {
     this.style.opacity = "1"; // Reset opacity
     dragtile.classList.remove("dragging"); // Remove dragging class
 
-   // Remove event listeners for drag and drop on board elements
-   let boardElems = document.querySelectorAll("#board img");
-   for (let i = 0; i < boardElems.length; i++) {
-       boardElems[i].removeEventListener("dragover", tilesoverBoard);
-       boardElems[i].removeEventListener("drop", tilesoverBoard);
-       boardElems[i].removeEventListener("dragleave", tilesoverBoard);
-   }
+ // Remove event listeners for drag and drop on board elements
+ let boardElems = document.querySelectorAll("#board img");
+ for (let i = 0; i < boardElems.length; i++) {
+     boardElems[i].removeEventListener("touchmove", touchmoveTiles);
+     boardElems[i].removeEventListener("touchend", touchendTiles);
+ }
+
+ // Get the drop target (board element)
+ let dropTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+ if (dropTarget && dropTarget.classList.contains("empty")) {
+     // Append the dragged tile to the drop target (board element)
+     dropTarget.appendChild(dragtile);
+     dragtile.style.transform = ""; // Reset tile position
+ }   
+
 }
 
 //aktiveras när brickorna börjar dras
