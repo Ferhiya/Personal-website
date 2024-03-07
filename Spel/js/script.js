@@ -43,8 +43,8 @@ function init(){
     
 
     //touch 
-     // Add touch event listeners for newTiles elements
-     for (let i = 0; i < newTilesElems.length; i++) {
+    //Add touch event listeners
+    for (let i = 0; i < newTilesElems.length; i++) {
         newTilesElems[i].addEventListener("touchstart", touchstartTiles);
         newTilesElems[i].addEventListener("touchmove", touchmoveTiles);
         newTilesElems[i].addEventListener("touchend", touchendTiles);
@@ -122,7 +122,12 @@ function touchstartTiles(e) {
     touchX = e.touches[0].clientX;
     touchY = e.touches[0].clientY;
     this.style.opacity = "0.5"; // Change opacity to indicate touch
+
+      // Store the reference to the tile being dragged
+      dragtile = this;
+      dragtile.classList.add("dragging"); // Add a class to indicate dragging
 }
+
 // Touch move event handler for newTiles elements
 function touchmoveTiles(e) {
     e.preventDefault();
@@ -133,12 +138,14 @@ function touchmoveTiles(e) {
         let deltaX = newX - touchX;
         let deltaY = newY - touchY;
 
-        // Store the reference to the tile being dragged
-    dragtile = this;
-    dragtile.classList.add("dragging"); // Add a class to indicate dragging
+        // Move the dragged tile based on touch movement
+        dragtile.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
+
+        // Change color of the tile when being dragged
+        dragtile.style.backgroundColor = "#f00"; // Set the color as desired
     }
 }
-// Touch end event handler for newTiles elements
+// Touch end event handler
 function touchendTiles(e) {
     e.preventDefault();
     this.style.opacity = "1"; // Reset opacity
@@ -154,79 +161,87 @@ function touchendTiles(e) {
 }
 
 //aktiveras när brickorna börjar dras
-// Function to start dragging tiles
-function dragstartTiles(e) {
+function dragstartTiles(e){   
+    e.dataTransfer.setData("text",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
+    dragtile=this; //överför information i dragtile till this
+
+
+//handesehanterare för drag och drop eventet när brickorna släpps på vald ruta på board 
+    for (let i=0; i < boardElem.length; i++){
+        boardElem[i].addEventListener("dragover", tilesoverBoard);
+        boardElem[i].addEventListener("drop", tilesoverBoard);
+        boardElem[i].addEventListener("dragleave", tilesoverBoard);
+    }
+
+
+} //end dragstartTiles
+
+//----------------------------------
+
+ //slutar drag
+function dragendTiles(e){
     e.preventDefault();
-    // For touch events, retrieve the touch coordinates
-    if (e.type === "touchstart") {
-        touchX = e.touches[0].clientX;
-        touchY = e.touches[0].clientY;
-    }
-    e.dataTransfer.setData("text", this.id); // Set the data to be transferred
-    dragtile = this; // Store the reference to the dragged tile
 
-    // Add event listeners for touch events while dragging
-    document.addEventListener("touchmove", touchmoveTiles);
-    document.addEventListener("touchend", touchendTiles);
-}
+//gör så att det inte går att lägga mer än en brick åt gången på spelplanenens rutor
+    let boardElem=document.getElementsByTagName("img"); 
 
-// Function to end dragging tiles
-function dragendTiles(e) {
-    e.preventDefault();
-    // Remove event listeners for touch events after dragging
-    document.removeEventListener("touchmove", touchmoveTiles);
-    document.removeEventListener("touchend", touchendTiles);
-}
-
-// Function to handle tile movement during dragging
-function touchmoveTiles(e) {
-    e.preventDefault();
-    // For touch events, calculate the tile movement based on touch coordinates
-    let deltaX = e.touches[0].clientX - touchX;
-    let deltaY = e.touches[0].clientY - touchY;
-    // Move the dragged tile based on touch movement
-    dragtile.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
-}
-
-// Function to handle tile drop on the board
-function tilesoverBoard(e) {
-    e.preventDefault();
-    // Get the data from the dragged tile
-    let idNr = e.dataTransfer.getData("text");
-
-    // Place the dragged tile on the board if dropped
-    if (e.type === "drop") {
-        this.src = "img/" + idNr + ".png"; // Set the image source on the board
-        this.id = idNr; // Set the ID of the dropped tile on the board
-
-        // Reset the source and class of the dragged tile
-        dragtile.src = "img/empty.png";
-        dragtile.classList.remove("filled");
-        dragtile.classList.add("empty");
-
-        // Remove empty class from the board tile and add filled class
-        this.classList.remove("empty");
-        this.classList.add("filled");
-        this.style.background = ""; // Reset background color
-
-        dragtile.style.pointerEvents = "none"; // Disable pointer events for the dragged tile
-    }
-    // Change background color when tile is dragged over
-    if (e.type === "dragover") {
-        this.style.background = "#9C9"; // Green background
-    }
-    // Reset background color when tile is dragged out
-    if (e.type === "dragleave") {
-        this.style.background = "";
+//avslutar drag och drop eventet när brickorna släpps på vald ruta på board
+    for (let i=0; i < boardElem.length; i++){
+        boardElem[i].removeEventListener("dragover", tilesoverBoard);
+        boardElem[i].removeEventListener("drop", tilesoverBoard);
+        boardElem[i].removeEventListener("dragleave", tilesoverBoard);
     }
 
-    // Check if all tiles on the board are filled
-    let board = document.getElementById("board");
-    if (board.getElementsByClassName("empty").length === 0) {
-        finalCounter(); // Call function to finalize the game
-    }
-}
+} //end dragendBricks
 
+//-------------------------------------------------
+
+ //släpper brickorna över vald ruta på board
+function tilesoverBoard(e){
+    e.preventDefault(); //prevents default functins
+    
+    //släpper brickorna över vald ruta på board
+	if (e.type == "drop"){
+        let idNr=e.dataTransfer.getData("text"); //läser av info i id-taggen i vald bricka
+       
+        this.src="img/" + idNr + ".png"; //lägger in rätt bildbricka i spelplanen med hjälp av idNr och img taggen
+
+        this.id=idNr; //överför this informationen som finns på spelbrickan som dras till idNr så att det kan användas för att visa bildbrickan när det placeras på spelplanen 
+
+        dragtile.src="img/empty.png"; //ersätter bildbrickan i rutan för nya brickor med en en tom bild, när bildbrickan börjar dras från rutan. 
+        dragtile.classList.remove("filled"); //tar bort classen filled i rutan för nya bildbrickor när bildbrickan dras. 
+        dragtile.classList.add("empty");  //lägger in classen tom så att rutan för nya bildbrickor aktiveras för en ny bildbricka.  
+        this.classList.remove("empty");//tar bort classen tom på spelplanen så att det kan ersättas med bildbrickans klass som är filled som ska dras över
+        this.classList.add("filled"); //fyller den tomma rutan på spelplanen med en bildbricka och classen filled som kommer med bildbrickan.  
+        this.style.background=""; //tom bakgrund i spelplanensrutor  
+
+        dragtile.style.pointerEvents="none";
+	}
+      //byter bakgrundsfärgen i spelplanensrutan dragover
+    if (e.type == "dragover"){
+
+       this.style.background="#9C9"; //grön bakgrund i spelplanenruta när bildbricka körs över ruta
+    }
+      //tar bort bakgrundsfärgen i spelrutan dragleave
+    if (e.type == "dragleave"){
+       this.style.background=""; 
+    }
+
+     //Skapar ny variabel för att kolla om rutorna för nya brickor är filled
+    let tiles=document.getElementById("newTiles")
+     //if-sats för att kolla om rutorna för nya brickor är full, om rutorna är tomma så återaktiveras knappen för nya brickor
+    if (tiles.getElementsByClassName("filled").length==0){
+    //aktiverar knappen för nya brickor när alla brickor är tomma
+    newTilesBtn.disabled=false;
+    }
+     //skapar ny variabel för att kolla om rutorna på spelplanen är tomma
+    let board=document.getElementById("board")
+     //if-sats för att kolla om det finns någon tomruta kvar på spelplanen.
+    if (board.getElementsByClassName("empty").length==0){
+       finalCounter(); //anroppar function finalcounter när spelplanen är full.
+    }
+
+} //end BrickoverBoard
 //----------------------------------------------------------
 
 //räknar ihop poängen i slutet
