@@ -116,6 +116,44 @@ function newTiles(){
 
  //---------------------------------------
 //starts dragstartBricks
+// Touch start event handler
+function touchstartTiles(e) {
+    e.preventDefault();
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+    this.style.opacity = "0.5"; // Change opacity to indicate touch
+}
+// Touch move event handler for newTiles elements
+function touchmoveTiles(e) {
+    e.preventDefault();
+    // Ensure that only one touch event is being handled
+    if (e.touches.length === 1) {
+        let newX = e.touches[0].clientX;
+        let newY = e.touches[0].clientY;
+        let deltaX = newX - touchX;
+        let deltaY = newY - touchY;
+
+        // Store the reference to the tile being dragged
+    dragtile = this;
+    dragtile.classList.add("dragging"); // Add a class to indicate dragging
+    }
+}
+// Touch end event handler for newTiles elements
+function touchendTiles(e) {
+    e.preventDefault();
+    this.style.opacity = "1"; // Reset opacity
+    dragtile.classList.remove("dragging"); // Remove dragging class
+
+    // Get the drop target (board element)
+    let dropTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    if (dropTarget && dropTarget.classList.contains("empty")) {
+        // Append the dragged tile to the drop target (board element)
+        dropTarget.appendChild(dragtile);
+        dragtile.style.transform = ""; // Reset tile position
+    }
+}
+
+//aktiveras när brickorna börjar dras
 // Function to start dragging tiles
 function dragstartTiles(e) {
     e.preventDefault();
@@ -188,6 +226,8 @@ function tilesoverBoard(e) {
         finalCounter(); // Call function to finalize the game
     }
 }
+
+//----------------------------------------------------------
 
 //räknar ihop poängen i slutet
 function finalCounter(){
