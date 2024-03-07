@@ -10,8 +10,6 @@ var countGamesElem; //referar till elementet för att räkna spelomgång
 var totpointsElem; //referar till elementet för att räkna poängen
 var countGames=0;  //räknar antal spelomgångar
 var totPoints=0;  //referar till poängen
-// Global variables
-var dragtile;
 
 
 
@@ -40,14 +38,10 @@ function init(){
     //aktivering och inaktovering av knapperna
     newGameBtn.disabled=false; //knappen för nytt spel aktiverad
 	newTilesBtn.disabled=true; //knappen för nya brickor inaktiverad
-
-   
     
 
 } // End init
 window.addEventListener("load",init); // Se till att init aktiveras då sidan är inladdad
-
-
 
 
  //starta spelet
@@ -115,7 +109,7 @@ function newTiles(){
 
 //aktiveras när brickorna börjar dras
 function dragstartTiles(e){   
-    e.dataTransfer.setData("text/plain",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
+    e.dataTransfer.setData("text",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
     dragtile=this; //överför information i dragtile till this
 
 
@@ -126,15 +120,8 @@ function dragstartTiles(e){
         boardElem[i].addEventListener("dragleave", tilesoverBoard);
     }
 
-    //toush screens
-
-    
-
 
 } //end dragstartTiles
-
-// Function to handle dragover event for tiles
-
 
 //----------------------------------
 
@@ -252,8 +239,8 @@ function finalCounter(){
 
  //funktion för Localstorage
 function getData() {
+   
     localStorage.clear();
-
     if (localStorage.fa223caUserinfo) {
        let dataArr=localStorage.fa223caUserinfo.split("&"); //skapar array av spelpoängen och spelomgångerna och delar upp det.
        totPoints= Number(dataArr[0]); //läser in spelpoäng 
@@ -273,31 +260,8 @@ function getData() {
         countGames = 0;
         totpointsElem.innerHTML = 0;
         countGamesElem.innerHTML = 0;
-        localStorage.clear();
+          
     }
 
     
 } //end localstorage
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.className);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var target = ev.target;
-    if (target.tagName === 'IMG') {
-        target = target.parentNode; // Get the parent <td> if the target is an <img> element
-    }
-    if (target.tagName === 'TD') {
-        // Check if the target is a <td> element
-        target.classList.remove('empty');
-        target.classList.add('filled');
-        target.innerHTML = '<img src="img/bricka.png" alt="bricka" class="' + data + '">';
-    }
-}
