@@ -122,5 +122,10 @@ ol{
     image-rendering: crisp-edges;
     image-rendering: pixelated;
   }
+
+  .language-skills {
+    margin-right: 15%;
+  }
+  
 }
   
