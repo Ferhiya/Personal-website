@@ -41,11 +41,7 @@ function init(){
     newGameBtn.disabled=false; //knappen för nytt spel aktiverad
 	newTilesBtn.disabled=true; //knappen för nya brickor inaktiverad
 
-    // Event listeners for touch events
-    for (let i = 0; i < newTilesElems.length; i++) {
-        newTilesElems[i].addEventListener("touchstart", touchstartTiles);
-        newTilesElems[i].addEventListener("touchend", touchendTiles);
-    }
+   
     
 
 } // End init
@@ -119,7 +115,7 @@ function newTiles(){
 
 //aktiveras när brickorna börjar dras
 function dragstartTiles(e){   
-    e.dataTransfer.setData("text",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
+    e.dataTransfer.setData("text/plain",this.id); //förr över innehållet i id-taggen new bricks till rutan i board.
     dragtile=this; //överför information i dragtile till this
 
 
@@ -132,6 +128,9 @@ function dragstartTiles(e){
 
 
 } //end dragstartTiles
+
+// Function to handle dragover event for tiles
+
 
 //----------------------------------
 
@@ -277,43 +276,55 @@ function getData() {
 } //end localstorage
 
 
+// Modify the touchEvent function to simulate touch events for dragging and dropping tiles
+function touchEvent(element, type, identifier, pageX, pageY) {
+    var e,
+        touch,
+        touches,
+        targetTouches,
+        changedTouches;
 
-//touce screens
-// Function to handle touchstart event for tiles
-// Function to handle touchstart event for tiles
-function touchstartTiles(e) {
-    e.preventDefault();
-    dragtile = this;
-    // Add event listeners for touchmove and touchend on the document
-    document.addEventListener("touchmove", touchmoveTiles);
-    document.addEventListener("touchend", touchendTiles);
+    if (!document.createTouch) {
+        throw new Error('This will work only in Safari browser.');
+    }
+
+    touch = document.createTouch(window, element, identifier, pageX, pageY, pageX, pageY);
+
+    if (type == 'touchend') {
+        touches = document.createTouchList();
+        targetTouches = document.createTouchList();
+        changedTouches = document.createTouchList(touch);
+    } else {
+        touches = document.createTouchList(touch);
+        targetTouches = document.createTouchList(touch);
+        changedTouches = document.createTouchList(touch);
+    }
+
+    e = document.createEvent('TouchEvent');
+    e.initTouchEvent(type, true, true, window, null, 0, 0, 0, 0, false, false, false, false, touches, targetTouches, changedTouches, 1, 0);
+
+    element.dispatchEvent(e); // Dispatch the touch event on the specified element
 }
 
-// Function to handle touchmove event for tiles
-function touchmoveTiles(e) {
-    e.preventDefault();
-    // Update the position of the tile based on touch coordinates
-    // Here's a basic example of how you can update the tile's position:
-    dragtile.style.left = e.touches[0].clientX - dragtile.offsetWidth / 2 + "px";
-    dragtile.style.top = e.touches[0].clientY - dragtile.offsetHeight / 2 + "px";
+// Function to handle touch events for dragging new tiles
+function handleNewTileDrag(element, pageX, pageY) {
+    var identifier = new Date().getTime(); // Generate a unique identifier for the touch event
+    touchEvent(element, 'touchstart', identifier, pageX, pageY); // Simulate touchstart event
+    touchEvent(element, 'touchmove', identifier, pageX + 50, pageY + 50); // Simulate touchmove event for dragging
+    touchEvent(element, 'touchend', identifier, pageX + 50, pageY + 50); // Simulate touchend event when dropping the tile
 }
 
-// Function to handle touchend event for tiles
-function touchendTiles(e) {
-    e.preventDefault();
-    // Remove event listeners for touchmove and touchend from the document
-    document.removeEventListener("touchmove", touchmoveTiles);
-    document.removeEventListener("touchend", touchendTiles);
-    // Implement logic to drop the tile when touch ends
-    // Check if the tile is dropped within a valid drop zone
-    // Similar to your existing logic for dragendTiles function
-
-    // Add event listeners for touch events on tiles
-for (let i = 0; i < newTilesElems.length; i++) {
-    newTilesElems[i].addEventListener("touchstart", touchstartTiles);
-    newTilesElems[i].addEventListener("touchmove", touchmoveTiles);
-    newTilesElems[i].addEventListener("touchend", touchendTiles);
-}
+// Example usage: Call this function when a new tile is created and needs to be dragged
+function createAndDragNewTile() {
+    var newTileElement = document.createElement('div'); // Create a new tile element
+    newTileElement.classList.add('new-tile'); // Add appropriate class to the new tile element
+    // Set the position of the new tile element on the screen
+    newTileElement.style.position = 'absolute';
+    newTileElement.style.left = '100px';
+    newTileElement.style.top = '100px';
+    document.body.appendChild(newTileElement); // Append the new tile element to the DOM
+    // Simulate touch events for dragging the new tile
+    handleNewTileDrag(newTileElement, 100, 100);
 }
 
 
