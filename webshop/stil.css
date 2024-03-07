@@ -62,7 +62,7 @@ nav ul li a {
 .pitch-container h1,
 .pitch-container p {
   text-align: left; /* Ensure both heading and paragraph text are aligned to the left */
-  font-size: 2rem;
+  font-size: 1.7rem;
  
 
 }
@@ -224,4 +224,20 @@ footer {
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
+}
+
+
+
+/*Contact page*/
+.contact{
+  margin: 20px;
+ 
+}
+#name, #email,#message{
+  margin-bottom: 10px;
+}
+
+#submitBTN{
+  width: 100px;
+  height: 30px;
 }

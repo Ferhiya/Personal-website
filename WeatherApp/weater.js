@@ -70,7 +70,6 @@ function sökVäder() {
 //Start requestTemp
 function requestTemp(city) {
     
-
     let request = new XMLHttpRequest();
     request.open("GET", "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/" + city.lng + "/lat/" + city.lat + "/data.json");
     request.send(null);
@@ -84,12 +83,14 @@ function requestTemp(city) {
 }//End requestTemp
 
 function getTemp(response, city) {
-
+   
     response = JSON.parse(response);
     params = response.timeSeries[0].parameters;
-    city.temp = params[10].values[0];
-    city.conditions = params[18].values[0];
-
+    city.temp = params[11].values[0];
+    city.precipitationCode = params[15].values[0]; // Retrieve precipitation code
+console.log(params);
+    // Determine weather condition
+    city.conditions = getWeatherCondition(city.precipitationCode);
     visaStandardStadsVäder("stockholm")
 }
 
@@ -98,6 +99,29 @@ function visaStandardStadsVäder(stad)
     hämtaVäder(stad);
    
 }
+
+function getWeatherCondition(precipitationCode) {
+
+    switch (precipitationCode) {
+        case 0:
+            return "Inget nederbörd";
+        case 1:
+            return "Snö";
+        case 2:
+            return "Snö och regn";
+        case 3:
+            return "Regn";
+        case 4:
+            return "Duggregn";
+        case 5:
+            return "Underkylt regn";
+        case 6:
+            return "Underkylt duggregn";
+        default:
+            return "Okänd";
+    }
+}
+
 function hämtaVäder(stadsName) {
     //Display dagens datum
     Displaydate.textContent= dayName + " Klockan" +formattedTime ;
@@ -117,12 +141,22 @@ function hämtaVäder(stadsName) {
             var väderElem = document.getElementById("temp");
             väderElem.textContent = "Temperaturen är: " + Math.round(city.temp) + "°C";
 
-            //condition
-            var väderCon = document.getElementById("cond");
-            väderCon.textContent = "Förhållandet är: " + city.conditions;
-            document.getElementById("cityInput").value = "";
+            //precipitationCode 
+            // Determine weather condition
+            var weatherCondition = getWeatherCondition(city.precipitationCode);
+            
+             // Update weather condition display
+             var väderCon = document.getElementById("cond");
+             väderCon.textContent = " " + weatherCondition;
+
+             
+             // Update weather image based on temperature
+             updateWeatherImage(weatherCondition);
+           
 // Update weather image based on temperature
-            updateWeatherImage(city.temp);
+      
+      
+           
             found = true;
 
             return; // Avsluta sökningen när staden har hittats
@@ -141,22 +175,38 @@ function hämtaVäder(stadsName) {
 }
 
 // Function to update the weather image based on temperature
-function updateWeatherImage(temperature) {
+function updateWeatherImage(weatherCondition) {
     const imgElement = document.getElementById('Weatherimg');
     
     let imgSrc = "/img/startweather.jpg"; // Default image
-  
-    // Check temperature and update image source accordingly
-    if (temperature > 10) {
-      imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
+    
+    
+    // Check weather condition and update image source accordingly
+    if (weatherCondition === "Inget nederbörd") {
+        imgSrc = "/img/sunnyDay.jpg"; // Rainy weather image
     } 
-    else if (temperature < 0) {
-      imgSrc = "/img/coldDays.jpg"; // Cold weather image
+    else if (weatherCondition === "Snö") {
+        imgSrc = "/img/ColdDays.jpg"; // Snowy weather image
+    } 
+    else if (weatherCondition === "Regn"){
+        imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
     }
 
-    else{
-        imgSrc = "/img/OkDay.jpg"; // Cold weather image
+    else if (weatherCondition === "Snö och regn"){
+        imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
     }
+    else if (weatherCondition === "Duggregn"){
+        imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
+    }
+    else if (weatherCondition === "Underkylt regn"){
+        imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
+    }
+    else if (weatherCondition === "Underkylt duggregn"){
+        imgSrc = "/img/sunnyDay.jpg"; // Hot weather image
+    }
+    
+
+  
   
     // Update the image source
     imgElement.src = imgSrc;
@@ -167,4 +217,4 @@ function updateWeatherImage(temperature) {
   
   // Update the weather image based on the temperature
   updateWeatherImage(temperature);
-  console.log(temperature);
+  

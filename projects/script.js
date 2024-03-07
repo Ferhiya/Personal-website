@@ -45,3 +45,13 @@ showButton5.addEventListener('click', function() {
     hiddenDiv5.classList.toggle('hidden5');
   });
   
+
+    //learn more for project 6
+const showButton6 = document.getElementById('show6');
+const hiddenDiv6 = document.getElementById('hidden6');
+
+showButton6.addEventListener('click', function() {
+    // Toggle the hidden class to show/hide the div
+    hiddenDiv6.classList.toggle('hidden6');
+  });
+  

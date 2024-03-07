@@ -14,16 +14,40 @@ const totalDuration = document.querySelector('.total-duration');
 // Define your track list
 const trackList = [
   {
-    name: 'Track 1',
-    artist: 'Artist 1',
+    name: 'Morning coffee',
+    artist: 'Soyb, Amine Maxwell',
     image: 'img/headphones.jpg',
-    source: 'audio/track1.mp3'
+    source: 'songs/track1.mp3'
   },
   {
-    name: 'Track 2',
-    artist: 'Artist 2',
+    name: 'I´m On My Way',
+    artist: 'Avanti',
     image: 'img/headphones.jpg',
-    source: 'audio/track2.mp3'
+    source: 'songs/track2.mp3'
+  },
+  {
+    name: 'Whispers',
+    artist: 'Popsicles',
+    image: 'img/headphones.jpg',
+    source: 'songs/track3.mp3'
+  },
+  {
+    name: 'Calling',
+    artist: 'Avanti',
+    image: 'img/headphones.jpg',
+    source: 'songs/track4.mp3'
+  },
+  {
+    name: 'Higher',
+    artist: 'Avanti',
+    image: 'img/headphones.jpg',
+    source: 'songs/track5.mp3'
+  },
+  {
+    name: 'Beautiful Liar',
+    artist: 'Markvard, AgusAlvarez',
+    image: 'img/headphones.jpg',
+    source: 'songs/track5.mp3'
   },
   // Add more tracks as needed
 ];
