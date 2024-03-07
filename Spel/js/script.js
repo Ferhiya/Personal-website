@@ -38,10 +38,18 @@ function init(){
     //aktivering och inaktovering av knapperna
     newGameBtn.disabled=false; //knappen för nytt spel aktiverad
 	newTilesBtn.disabled=true; //knappen för nya brickor inaktiverad
+
+    // Event listeners for touch events
+    for (let i = 0; i < newTilesElems.length; i++) {
+        newTilesElems[i].addEventListener("touchstart", touchstartTiles);
+        newTilesElems[i].addEventListener("touchend", touchendTiles);
+    }
     
 
 } // End init
 window.addEventListener("load",init); // Se till att init aktiveras då sidan är inladdad
+
+
 
 
  //starta spelet
@@ -265,3 +273,37 @@ function getData() {
 
     
 } //end localstorage
+
+
+
+//touce screens
+// Function to handle touchstart event for tiles
+function touchstartTiles(e) {
+    e.preventDefault();
+    dragtile = this;
+    // Add event listeners for touch events on board elements
+    for (let i = 0; i < boardElem.length; i++) {
+        boardElem[i].addEventListener("touchmove", touchmoveTiles);
+        boardElem[i].addEventListener("touchend", touchendTiles);
+    }
+}
+
+function touchmoveTiles(e) {
+    e.preventDefault();
+    // Implement the necessary logic to move the tile along with the touch movement
+    // You may need to update the tile's position based on touch coordinates
+}
+
+
+// Function to handle touchend event for tiles
+function touchendTiles(e) {
+    e.preventDefault();
+    // Implement logic to drop the tile when touch ends
+    // You may need to check if the tile is dropped within a valid drop zone
+    // Similar to your existing logic for dragendTiles function
+    // Remove event listeners for touchmove and touchend from board elements
+    for (let i = 0; i < boardElem.length; i++) {
+        boardElem[i].removeEventListener("touchmove", touchmoveTiles);
+        boardElem[i].removeEventListener("touchend", touchendTiles);
+    }
+}
