@@ -210,62 +210,50 @@ function dragendTiles(e){
  //släpper brickorna över vald ruta på board
 // Function to handle dropping tiles on the board
 // Function to handle dropping tiles on the board
-function tilesoverBoard(e) {
-    e.preventDefault(); // Prevents default functions
-   
-    // If the drop event is triggered
-    if (e.type == "drop") {
-        // Read the id of the dragged tile from dataTransfer
-        let idNr = e.dataTransfer.getData("text");
+function tilesoverBoard(e){
+    e.preventDefault(); //prevents default functins
+    
+    //släpper brickorna över vald ruta på board
+	if (e.type == "drop"){
+        let idNr=e.dataTransfer.getData("text"); //läser av info i id-taggen i vald bricka
+       
+        this.src="img/" + idNr + ".png"; //lägger in rätt bildbricka i spelplanen med hjälp av idNr och img taggen
 
-        // Set the src attribute of the board element to the image corresponding to the id
-        this.src = "img/" + idNr + ".png";
+        this.id=idNr; //överför this informationen som finns på spelbrickan som dras till idNr så att det kan användas för att visa bildbrickan när det placeras på spelplanen 
 
-        // Set the id of the board element to the id of the dropped tile
-        this.id = idNr;
+        dragtile.src="img/empty.png"; //ersätter bildbrickan i rutan för nya brickor med en en tom bild, när bildbrickan börjar dras från rutan. 
+        dragtile.classList.remove("filled"); //tar bort classen filled i rutan för nya bildbrickor när bildbrickan dras. 
+        dragtile.classList.add("empty");  //lägger in classen tom så att rutan för nya bildbrickor aktiveras för en ny bildbricka.  
+        this.classList.remove("empty");//tar bort classen tom på spelplanen så att det kan ersättas med bildbrickans klass som är filled som ska dras över
+        this.classList.add("filled"); //fyller den tomma rutan på spelplanen med en bildbricka och classen filled som kommer med bildbrickan.  
+        this.style.background=""; //tom bakgrund i spelplanensrutor  
 
-        // Reset the src and class of the dragged tile to empty
-        dragtile.src = "img/empty.png";
-        dragtile.classList.remove("filled");
-        dragtile.classList.add("empty");
+        dragtile.style.pointerEvents="none";
+	}
+      //byter bakgrundsfärgen i spelplanensrutan dragover
+    if (e.type == "dragover"){
 
-        // Remove the empty class from the board element and add the filled class
-        this.classList.remove("empty");
-        this.classList.add("filled");
-
-        // Reset the background of the board element
-        this.style.background = "";
-
-        // Disable pointer events for the dragged tile
-        dragtile.style.pointerEvents = "none";
-
-        // Check if there are any empty tiles left on the board
-        let board = document.getElementById("board");
-        if (board.getElementsByClassName("empty").length == 0) {
-            // Re-enable the "Nya Brickor" button
-            newTilesBtn.disabled = false;
-        }
+       this.style.background="#9C9"; //grön bakgrund i spelplanenruta när bildbricka körs över ruta
+    }
+      //tar bort bakgrundsfärgen i spelrutan dragleave
+    if (e.type == "dragleave"){
+       this.style.background=""; 
     }
 
-    // Change the background color of the board element on dragover
-    if (e.type == "dragover") {
-        this.style.background = "#9C9"; // Green background when tile is dragged over
+     //Skapar ny variabel för att kolla om rutorna för nya brickor är filled
+    let tiles=document.getElementById("newTiles")
+     //if-sats för att kolla om rutorna för nya brickor är full, om rutorna är tomma så återaktiveras knappen för nya brickor
+    if (tiles.getElementsByClassName("filled").length==0){
+    //aktiverar knappen för nya brickor när alla brickor är tomma
+    newTilesBtn.disabled=false;
     }
-
-    // Remove the background color of the board element on dragleave
-    if (e.type == "dragleave") {
-        this.style.background = "";
+     //skapar ny variabel för att kolla om rutorna på spelplanen är tomma
+    let board=document.getElementById("board")
+     //if-sats för att kolla om det finns någon tomruta kvar på spelplanen.
+    if (board.getElementsByClassName("empty").length==0){
+        newTilesBtn.disabled=true;
+       finalCounter(); //anroppar function finalcounter när spelplanen är full.
     }
-
-    // Check if all tiles on the board are filled
-    let board = document.getElementById("board");
-    if (board.getElementsByClassName("empty").length == 0) {
-        // Call finalCounter function when the board is full
-        finalCounter();
-        // Re-enable the "Nya Brickor" button after the game is finished
-        newTilesBtn.disabled = false;
-    }
-    newTilesBtn.disabled = false;
 }
 
 
