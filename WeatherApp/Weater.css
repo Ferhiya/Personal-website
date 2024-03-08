@@ -32,7 +32,8 @@ header {
     flex-direction: column;
     align-items: center;
     width: 750px;
-    height: 600px;
+    width: 50%;
+    height: 700px;
     margin: 0 auto; /* Center horizontally */
     border: 1.5px solid black;
     
