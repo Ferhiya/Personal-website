@@ -117,7 +117,7 @@ header {
     }
   
     .container {
-      width: 85%; /* Adjusted width for smaller screens */
+      width: 100%; /* Adjusted width for smaller screens */
       height: auto; /* Auto height for smaller screens */
       margin: 0 auto; /* Center horizontally */
     }
@@ -184,7 +184,7 @@ header {
     }
   
     .container {
-      width: 80%; /* Adjusted width for smaller screens */
+      width: 100%; /* Adjusted width for smaller screens */
       height: auto; /* Auto height for smaller screens */
       margin: 0 auto; /* Center horizontally */
       margin-bottom: 100px;
