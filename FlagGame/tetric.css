@@ -34,7 +34,7 @@ h1 {
 .flag-container {
   margin-top: 20px;
   border: 1px solid black;
-  width: 600px; /* Adjust the width as needed */
+  width: 400px; /* Adjust the width as needed */
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
@@ -42,7 +42,7 @@ h1 {
 }
 
 #flag {
-  width: 590px;
+  width: 400px;
   height: auto;
 }
 
@@ -170,5 +170,38 @@ footer {
     display: block; /* Display the button as a block element */
     margin: 10px auto; /* Center the button */
   }
+}
+
+/* Add this CSS to your existing CSS file */
+/* Add this CSS to your existing CSS file */
+
+
+#flag {
+  width: 400px;
+  height: auto;
+}
+.grid-container {
+  display: block;
+  grid-template-columns: auto auto auto;
+}
+.grid-item {
+  font-size: 20px;
+  text-align: center;
+}
+
+.constiner{
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space items evenly in the container */
+  align-items: center; /* Center items vertically */
+  margin-top: 20px;
+  margin-right:300px;
+ 
+}
+
+.timer-container{
+  border: 2px solid black;
+  background-color: bisque;
+  margin: 20px;
+  font-size: 1rem;
 }
 
