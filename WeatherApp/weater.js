@@ -145,6 +145,9 @@ const formattedTime = `${hours}:${minutes}`;
 var Displaydate;
 var weatherImg;
 var DisplayCity;
+var DisplayTime;
+var tempElem;
+var condElem;
 
 function init() {
     testElem = document.getElementById("test");
@@ -154,7 +157,8 @@ function init() {
     Displaydate=document.getElementById("date");
     DisplayTime=document.getElementById("time");
     DisplayCity=document.getElementById("stad");
-
+    tempElem=document.getElementById("temp");
+    condElem=document.getElementById("cond");
   
     for (let i = 0; i < cities.length; i++) {
         requestTemp(cities[i]);
@@ -171,6 +175,7 @@ window.addEventListener("load", init);
 
 function sökVäder() {
     var stadsName = document.getElementById("cityInput").value;
+    console.log(stadsName);
     hämtaVäder(stadsName);
 }
 //Start requestTemp
@@ -189,16 +194,27 @@ function requestTemp(city) {
 }//End requestTemp
 
 function getTemp(response, city) {
-   
     response = JSON.parse(response);
     params = response.timeSeries[0].parameters;
-    city.temp = params[0].values[0];
-    city.precipitationCode = params[15].values[0]; // Retrieve precipitation code
-    console.log(params);
+
+    // Find the parameter values by their names
+    for (let param of params) {
+        if (param.name === "t") {
+            city.temp = param.values[0];
+        } else if (param.name === "pcat") {
+            city.precipitationCode = param.values[0];
+        }
+    }
+
     // Determine weather condition
     city.conditions = getWeatherCondition(city.precipitationCode);
-    visaStandardStadsVäder("stockholm")
+    
+    // Update weather display for Stockholm (You may want to change this)
+    visaStandardStadsVäder("stockholm");
+
+    console.log(params);
 }
+
 
 function visaStandardStadsVäder(stad)
 {
@@ -229,31 +245,42 @@ function getWeatherCondition(precipitationCode) {
 }
 
 function hämtaVäder(stadsName) {
+    // Update the time
+    console.log(stadsName);
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+    const minutes = currentTime.getMinutes();
+    const formattedTime = `${hours}:${minutes}`;
+    DisplayTime.textContent = "Klockan " + formattedTime;
+   
     //Display dagens datum
-    Displaydate.textContent= dayName + " Klockan" +formattedTime ;
+    Displaydate.textContent= dayName;
     DisplayCity.textContent="Stad: "+stadsName;
     var found = false;
     
     // Sök efter staden i din cities-array
     for (var i = 0; i < cities.length; i++) {
         // Sök efter staden i din cities-array
-        
+        var väderElement = document.getElementById("wrongCityname");
+        väderElement.textContent = " ";
         if (cities[i].name.toLowerCase() === stadsName.toLowerCase()) {
 
             var city = cities[i];
             var väderElement = document.getElementById("weatherInfo");
 
             //temp
-            var väderElem = document.getElementById("temp");
-            väderElem.textContent = "Temperaturen är: " + Math.round(city.temp) + "°C";
+           
+              if (tempElem !== null) {
+                tempElem.textContent = "Temperaturen är: " + Math.round(city.temp) + "°C";
+            }
 
             //precipitationCode 
             // Determine weather condition
             var weatherCondition = getWeatherCondition(city.precipitationCode);
             
              // Update weather condition display
-             var väderCon = document.getElementById("cond");
-             väderCon.textContent = " " + weatherCondition;
+           
+             condElem.textContent = " " + weatherCondition;
 
              
              // Update weather image based on temperature
@@ -267,17 +294,29 @@ function hämtaVäder(stadsName) {
 
             return; // Avsluta sökningen när staden har hittats
         }
+
     }
 
     // Om staden inte hittades
     // If the city was not found
     if (!found) {
-        var väderElement = document.getElementById("weatherInfo");
+        //clear temp and condtion
+       
+        tempElem.textContent = " ";
+
+      
+        condElem.textContent = " ";
+
+        var väderElement = document.getElementById("wrongCityname");
+    
         väderElement.innerHTML = "<p>Väder information om staden finns inte</p>";
+        väderElement.style.display = "block"; // Show the error message
+    
         // Clear the input field after the search
         document.getElementById("cityInput").value = "";
+    
         return;
-    }
+    } 
 }
 
 // Function to update the weather image based on temperature
