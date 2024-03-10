@@ -56,7 +56,8 @@ const trackList = [
 let trackIndex = 0;
 let isPlaying = false;
 let updateTimer;
-
+// Load the default track when the page loads or reloads
+loadTrack(trackIndex); // <-- Load "Morning Coffee" by default
 // Function to load the currently selected track
 function loadTrack(trackIndex) {
   const track = trackList[trackIndex];
@@ -117,6 +118,3 @@ audio.addEventListener('timeupdate', function() {
   currentTime.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' + currentSeconds : currentSeconds}`;
   totalDuration.textContent = `${durationMinutes}:${durationSeconds}`;
 });
-
-// Load the initial track
-loadTrack(trackIndex);
