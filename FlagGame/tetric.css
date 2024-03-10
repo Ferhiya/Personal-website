@@ -135,6 +135,15 @@ footer {
     margin-right: 0; /* Reset margin-right */
   }
   
+  .constiner{
+    display: block; /* Use flexbox for layout */
+    justify-content: space-between; /* Space items evenly in the container */
+    align-items: center; /* Center items vertically */
+    margin-top: 20px;
+    margin: 0 auto;
+    max-width: 350px;
+   
+  }
 
   .flag-container {
     width: 60%; /* Adjusted width for smaller screens */
@@ -147,15 +156,7 @@ footer {
     height: auto; /* Maintain aspect ratio */
   }
   
-  .constiner{
-    display: block; /* Use flexbox for layout */
-    justify-content: space-between; /* Space items evenly in the container */
-    align-items: center; /* Center items vertically */
-    margin-top: 20px;
-    margin: 0 auto;
-    width: 300px;
-   
-  }
+ 
 }
 
 @media screen and (max-width: 400px) {
@@ -173,47 +174,54 @@ footer {
     padding: 0; /* Reset padding */
   }
   
-
-  
-  input[type="text"] {
-    width: calc(60% - 12px); /* Adjusted width for smaller screens */
-  }
   
   button {
     display: block; /* Display the button as a block element */
     margin: 10px auto; /* Center the button */
   }
-
+  .constiner {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin: 0 auto;
+    max-width: 300px; /* Set the maximum width of the container */
+  }
+  
+  .flag-container {
+    width: 100%; /* Adjusted width for smaller screens */
+    margin: 0 auto; /* Center the flag container */
+  }
+  
+  #flag {
+    width: 100%; /* Full width for smaller screens */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
   .timer-container {
     width: 100%; /* Full width for smaller screens */
     margin-right: 0; /* Reset margin-right */
   }
-
-  .flag-container {
-    width: 60%; /* Adjusted width for smaller screens */
-    margin: 0 auto; /* Center the flag container */
-  }
-  
-  
-  #flag {
-    width: 60%; /* Full width for smaller screens */
-    height: auto; /* Maintain aspect ratio */
+    
+  input[type="text"] {
+    width: calc(60% - 12px); /* Adjusted width for smaller screens */
   }
 
-  .constiner{
-    display: block; /* Use flexbox for layout */
-    justify-content: space-between; /* Space items evenly in the container */
-    align-items: center; /* Center items vertically */
-    margin-top: 20px;
-    margin: 0 auto;
-    width: 80%;
-   
-  }
 
 }
 
-/* Add this CSS to your existing CSS file */
-/* Add this CSS to your existing CSS file */
+
+.constiner{
+  display: block; /* Use flexbox for layout */
+  justify-content: space-between; /* Space items evenly in the container */
+  align-items: center; /* Center items vertically */
+  margin-top: 20px;
+  margin: 0 auto;
+  width: 500px;
+ 
+}
+
+
 .flag-container {
   width: 100%; /* Adjusted width for smaller screens */
   margin: 0 auto; /* Center the flag container */
@@ -233,16 +241,6 @@ footer {
 .grid-item {
   font-size: 20px;
   text-align: center;
-}
-
-.constiner{
-  display: block; /* Use flexbox for layout */
-  justify-content: space-between; /* Space items evenly in the container */
-  align-items: center; /* Center items vertically */
-  margin-top: 20px;
-  margin: 0 auto;
-  width: 500px;
- 
 }
 
 .timer-container{
