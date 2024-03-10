@@ -125,39 +125,29 @@ footer {
     margin-top: auto;
   }
 
-  
-/* Media screen for screens less than 600px */
+  /* Media Queries */
 @media screen and (max-width: 600px) {
-  header {
-    font-size: 12px; /* Decrease font size for smaller screens */
-    
-  }
-
-  nav a {
-    margin: 0 10px; /* Adjust margin for smaller screens */
-    font-size: 12px; /* Decrease font size for smaller screens */
-    
-  }
-
-  h1, p{
-    font-size: 1em;
-  }
-
-  
-  .left-section img,
-  .right-section img {
-    width: 100%; /* Ensure images take full width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure images don't exceed container width */
-    image-rendering: -webkit-optimize-contrast; /* Improve image rendering quality */
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-  }
-
-  .language-skills {
-    margin-right: 15%;
+    /* CSS rules for screens less than 600px */
+    .memory-game {
+      max-width: 400px; /* Adjusting max-width for smaller screens */
+    }
   }
   
-}
-  
-  
+  @media screen and (max-width: 400px) {
+    /* CSS rules for screens less than 400px */
+    .memory-game {
+      max-width: 380px; /* Adjusting max-width for even smaller screens */
+    }
+    .memory-card {
+        width: 80px;
+        height: 80px;
+        background-color: #f0f0f0;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+      }
+   
+  }
