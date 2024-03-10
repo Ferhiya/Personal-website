@@ -87,6 +87,12 @@ const newTilesNr=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","
 function newTiles(){
     newTilesBtn.disabled=true; //avaktiverar knappen för nya brickor
 
+    // Shuffle the newTilesNr array
+    for (let i = newTilesNr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newTilesNr[i], newTilesNr[j]] = [newTilesNr[j], newTilesNr[i]];
+    }
+
     //väljer ut fyra slummässiga bildbrickor från array
     for (let i=0; i < newTilesElems.length; i++){
 
@@ -251,7 +257,7 @@ function tilesoverBoard(e){
     let board=document.getElementById("board")
      //if-sats för att kolla om det finns någon tomruta kvar på spelplanen.
     if (board.getElementsByClassName("empty").length==0){
-        newTilesBtn.disabled=true;
+        newTilesBtn.disabled=false
        finalCounter(); //anroppar function finalcounter när spelplanen är full.
     }
 }
@@ -269,7 +275,7 @@ function finalCounter(){
         if (Number(marktiles[0].id) < Number(marktiles[1].id)&&
            Number(marktiles[1].id) < Number(marktiles[2].id) &&
            Number(marktiles[2].id) < Number(marktiles[3].id)){ 
-           console.log([1].id);
+          
 
            markElem.style.color="#0C0";//grön färg
            markElem.innerHTML="&#10003;";//grön check=stigande rad eller kolumn
